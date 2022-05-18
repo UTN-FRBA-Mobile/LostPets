@@ -37,8 +37,9 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         super.onViewCreated(view, savedInstanceState)
         setup()
     }
+
     private fun setup() {
-        //title = "Inicio"
+        /* Se vuelve a la pantalla de "Login" en caso de cerrarse la sesión */
         binding.logoutButtom.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
             val bundle = bundleOf("email" to email)

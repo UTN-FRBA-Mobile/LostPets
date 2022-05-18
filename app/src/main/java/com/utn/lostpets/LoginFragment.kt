@@ -35,10 +35,10 @@ class LoginFragment : Fragment() {
 
     private fun setup() {
 
-        //title = "Autenticación"
-
+        /* Acción de "Registrarse" */
         binding.signUpButtom.setOnClickListener {
             if(binding.emailEditText.text.isNotEmpty() && binding.passwordEditText.text.isNotEmpty())
+                /* Le pasamos mail y pass a Firebase que se encargará de autenticar al usuario */
                 FirebaseAuth.getInstance().createUserWithEmailAndPassword(binding.emailEditText.text.toString(),binding.passwordEditText.text.toString())
                     .addOnCompleteListener {
                         if(it.isSuccessful) {
@@ -49,8 +49,10 @@ class LoginFragment : Fragment() {
                     }
         }
 
+        /* Acción de "Acceder" */
         binding.loginButtom.setOnClickListener {
             if(binding.emailEditText.text.isNotEmpty() && binding.passwordEditText.text.isNotEmpty())
+            /* Le pasamos mail y pass a Firebase que se encargará de autenticar al usuario */
                 FirebaseAuth.getInstance().signInWithEmailAndPassword(binding.emailEditText.text.toString(),binding.passwordEditText.text.toString())
                     .addOnCompleteListener {
                         if(it.isSuccessful) {
@@ -62,6 +64,7 @@ class LoginFragment : Fragment() {
         }
     }
 
+    /* Mostramos alerta en caso de que haya fallado la autenticación */
     private fun showAlert() {
         val builder = AlertDialog.Builder(getActivity())
         builder.setTitle("Error")
@@ -71,6 +74,7 @@ class LoginFragment : Fragment() {
         dialog.show()
     }
 
+    /* Redirigimos a pantalla principal en caso de login exitoso */
     private fun showHome(email: String) {
         val bundle = bundleOf("email" to email)
         val action = R.id.action_loginFragment_to_mapsFragment
