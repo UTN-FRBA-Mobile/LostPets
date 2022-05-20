@@ -3,6 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Facundo D/GitHub/LostPets/android/app/src/main/res/drawable/background.xml" value="0.124" />
+        <entry key="..\:/Users/Facundo D/GitHub/LostPets/android/app/src/main/res/drawable/button_background.xml" value="0.2265" />
+        <entry key="..\:/Users/Facundo D/GitHub/LostPets/android/app/src/main/res/drawable/ic_launcher_background.xml" value="0.124" />
+        <entry key="..\:/Users/Facundo D/GitHub/LostPets/android/app/src/main/res/drawable/login_rectangle.xml" value="0.182" />
+        <entry key="..\:/Users/Facundo D/GitHub/LostPets/android/app/src/main/res/layout/activity_main.xml" value="0.176" />
+        <entry key="..\:/Users/Facundo D/GitHub/LostPets/android/app/src/main/res/layout/fragment_login.xml" value="0.264" />
+        <entry key="..\:/Users/Facundo D/GitHub/LostPets/android/app/src/main/res/layout/fragment_maps.xml" value="0.2" />
         <entry key="..\:/Users/nicol/AndroidStudioProjects/LostPets/android/app/src/main/res/layout/activity_main.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/nicol/AndroidStudioProjects/LostPets/android/app/src/main/res/layout/fragment_blank.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/nicol/AndroidStudioProjects/LostPets/android/app/src/main/res/layout/fragment_login.xml" value="0.18802083333333333" />
