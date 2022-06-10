@@ -1,4 +1,4 @@
-package com.utn.lostpets
+package com.utn.lostpets.fragments
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -9,6 +9,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
+import com.utn.lostpets.R
 import com.utn.lostpets.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment() {
