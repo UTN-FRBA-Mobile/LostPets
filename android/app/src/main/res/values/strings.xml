@@ -2,5 +2,20 @@
     <string name="app_name">LostPets</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="login">Entrá con tu cuenta</string>
+
+    <!-- Login -->
+    <string name="loginTextView">Entrá con tu cuenta</string>
+    <string name="inputMail">Ingrese su mail</string>
+    <string name="inputPassword">Ingrese su contraseña</string>
+    <string name="botonAcceder">Acceder</string>
+    <string name="botonGoogle">ACCEDER CON GOOGLE</string>
+    <string name="botonFacebook">ACCEDER CON FACEBOOK</string>
+    <string name="labelRegistro">No tienes una cuenta?</string>
+    <string name="botonRegistrarse">REGISTRARSE</string>
+
+    <!-- Registro -->
+    <string name="registerTextView">Cree una cuenta</string>
+    <string name="botonCrearCuenta">Crear Cuenta</string>
+    <string name="labelCuenta">Ya tienes una cuenta?</string>
+    <string name="botonVolverAcceder">ACCEDER</string>
 </resources>

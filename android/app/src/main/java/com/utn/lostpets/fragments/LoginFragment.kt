@@ -44,18 +44,10 @@ class LoginFragment : Fragment() {
 
     private fun setup() {
 
-        /* Acción de "Registrarse" */
+        /* Acción de ir a "Registrarse" */
         binding.signUpButtom.setOnClickListener {
-            if (binding.emailEditText.text.isNotEmpty() && binding.passwordEditText.text.isNotEmpty())
-            /* Le pasamos mail y pass a Firebase que se encargará de autenticar al usuario */
-                FirebaseAuth.getInstance().createUserWithEmailAndPassword(binding.emailEditText.text.toString(), binding.passwordEditText.text.toString())
-                    .addOnCompleteListener {
-                        if (it.isSuccessful) {
-                            showHome(it.result?.user?.email ?: "")
-                        } else {
-                            showAlert()
-                        }
-                    }
+            val action = R.id.action_loginFragment_to_registrationFragment
+            findNavController().navigate(action)
         }
 
         /* Acción de "Acceder" */
@@ -88,6 +80,7 @@ class LoginFragment : Fragment() {
         }
     }
 
+    /* Hace el intento de login con Google */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
