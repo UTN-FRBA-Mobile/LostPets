@@ -72,4 +72,8 @@ dependencies {
     /* Google Authentication */
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.android.gms:play-services-auth:20.2.0'
+
+    /* Facebook Authentication */
+    implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
 }

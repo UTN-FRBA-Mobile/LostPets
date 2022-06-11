@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
+import com.facebook.login.LoginManager
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.firebase.auth.FirebaseAuth
@@ -43,6 +44,10 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         /* Se vuelve a la pantalla de "Login" en caso de cerrarse la sesión */
         binding.logoutButtom.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
+
+            // Si el login es con Facebook
+            LoginManager.getInstance().logOut()
+
             val bundle = bundleOf("email" to email)
             val action = R.id.action_mapsFragment_to_loginFragment
             findNavController().navigate(action,bundle)
