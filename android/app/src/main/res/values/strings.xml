@@ -3,6 +3,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!-- URL Api Publications -->
+    <string name="publications_api">http://localhost:8000/publications</string>
+
     <!-- Login Fragment -->
     <string name="loginTextView">Entrá con tu cuenta</string>
     <string name="inputMail">Ingrese su mail</string>

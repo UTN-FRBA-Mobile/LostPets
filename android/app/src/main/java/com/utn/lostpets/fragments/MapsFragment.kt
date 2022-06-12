@@ -52,5 +52,12 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
             val action = R.id.action_mapsFragment_to_loginFragment
             findNavController().navigate(action,bundle)
         }
+
+        /* Voy a pantalla de publis */
+        binding.publicationsButtom.setOnClickListener {
+            val bundle = bundleOf("email" to email)
+            val action = R.id.action_mapsFragment_to_publicationsFragment
+            findNavController().navigate(action,bundle)
+        }
     }
 }

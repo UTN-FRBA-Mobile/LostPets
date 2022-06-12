@@ -41,5 +41,13 @@ tools:context=".fragments.MapsFragment" >
         android:layout_weight="1"
         android:text="Cerrar Sesión" />
 
+    <Button
+        android:id="@+id/publicationsButtom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Publis" />
+
 </RadioGroup>
+
 </FrameLayout>
