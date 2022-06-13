@@ -53,11 +53,24 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
             findNavController().navigate(action,bundle)
         }
 
-        /* Voy a pantalla de publis */
-        binding.publicationsButtom.setOnClickListener {
-            val bundle = bundleOf("email" to email)
-            val action = R.id.action_mapsFragment_to_publicationsFragment
-            findNavController().navigate(action,bundle)
+        binding.bottomNavigation.setOnItemSelectedListener { item ->
+            when(item.itemId) {
+                /* Voy a pantalla de publis */
+                R.id.publications -> {
+                    val bundle = bundleOf("email" to email)
+                    val action = R.id.action_mapsFragment_to_publicationsFragment
+                    findNavController().navigate(action,bundle)
+                    true
+                }
+                R.id.profile -> {
+                    true
+                }
+                R.id.search -> {
+                    true
+                }
+
+                else -> false
+            }
         }
     }
 }
