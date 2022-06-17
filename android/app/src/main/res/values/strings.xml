@@ -29,6 +29,16 @@
 
     <!-- Ítem Publicación -->
     <string name="contactoTextView">Contacto:</string>
+    <string name="distanceStart">A</string>
+    <string name="distanceEnd">kilómetros</string>
+    <string name="timeStart">Hace</string>
+    <string name="timeYears">año/s</string>
+    <string name="timeMonths">mes/es</string>
+    <string name="timeDays">día/s</string>
+    <string name="timeHours">hora/s</string>
+    <string name="timeMinutes">minuto/s</string>
+    <string name="timeSeconds">segundo/s</string>
+    <string name="timeRecent">un instante</string>
 
 
 </resources>
