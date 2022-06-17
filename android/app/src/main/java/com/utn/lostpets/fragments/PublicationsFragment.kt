@@ -10,8 +10,10 @@ import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.utn.lostpets.adapters.PublicationsAdapter
 import com.utn.lostpets.databinding.FragmentPublicationsBinding
+import com.utn.lostpets.dataclass.PublicationsPhotosResponse
 import com.utn.lostpets.dataclass.PublicationsResponse
 import com.utn.lostpets.interfaces.ApiPublicationsService
+import com.utn.lostpets.model.Publication
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -24,9 +26,12 @@ class PublicationsFragment : Fragment() {
     private var _binding: FragmentPublicationsBinding? = null
     private val binding get() = _binding!!
 
+    private val apiUrl = "http://www.mengho.link/publications/";
+
     /* Adapter para listar publicaciones */
     private lateinit var adapter: PublicationsAdapter
-    private val publicationsImages = mutableListOf<PublicationsResponse>()
+    private val publicacionesFinal = mutableListOf<Publication>()
+    private val publicaciones = mutableListOf<Publication>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,7 +50,7 @@ class PublicationsFragment : Fragment() {
 
     /* Inicialización Recycler View */
     private fun initRecyclerView() {
-        adapter = PublicationsAdapter(publicationsImages)
+        adapter = PublicationsAdapter(publicacionesFinal)
         binding.listaPublicaciones.layoutManager = LinearLayoutManager(activity)
         binding.listaPublicaciones.adapter = adapter
         searchByDescripcion("")
@@ -53,20 +58,47 @@ class PublicationsFragment : Fragment() {
 
     private fun getRetrofit() : Retrofit {
         return Retrofit.Builder()
-            .baseUrl("http://www.mengho.link/publications/")
+            .baseUrl(apiUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
 
     private fun searchByDescripcion(query: String) {
-        /* Creamos un hilo secundario para solicitar las publicaciones*/
+        /* Creamos un hilo secundario para solicitar las publicaciones y sus respectivas fotos */
         CoroutineScope(Dispatchers.IO).launch {
-            val call = getRetrofit().create(ApiPublicationsService::class.java).getPublications("http://www.mengho.link/publications/")
+
+            /* Solicitamos las fotos */
+            val call = getRetrofit().create(ApiPublicationsService::class.java).getPublications("$apiUrl")
             val publications = call.body()
+
+            /* Por publicación solicitamos sus fotos */
+            if (publications != null) {
+                for(unaPubli in publications) {
+                    var urlExt = unaPubli.foto;
+                    val call = getRetrofit().create(ApiPublicationsService::class.java).getPublicationsPhotos("$apiUrl" + "photo/$urlExt/")
+                    val photo = call.body()
+                    if(photo != null) {
+                        var publiFinal = Publication(
+                            unaPubli.id,
+                            unaPubli.usuario,
+                            unaPubli.descripcion,
+                            unaPubli.contacto,
+                            unaPubli.fechaPublicacion,
+                            photo.foto,
+                            unaPubli.latitud,
+                            unaPubli.longitud,
+                            unaPubli.esPerdido,
+                            unaPubli.activo
+                        );
+                        publicaciones.add(publiFinal);
+                    }
+                }
+            }
+
             activity?.runOnUiThread {
                 if(call.isSuccessful) {
-                    publicationsImages.clear()
-                    publicationsImages.addAll(publications ?: emptyList())
+                    publicacionesFinal.clear()
+                    publicacionesFinal.addAll(publicaciones ?: emptyList())
                     adapter.notifyDataSetChanged()
                 } else {
                     showError()

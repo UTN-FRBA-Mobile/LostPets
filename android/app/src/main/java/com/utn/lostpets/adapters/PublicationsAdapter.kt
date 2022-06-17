@@ -5,9 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.utn.lostpets.R
 import com.utn.lostpets.dataclass.PublicationsResponse
+import com.utn.lostpets.model.Publication
 import java.util.List
 
-class PublicationsAdapter(val publications: kotlin.collections.List<PublicationsResponse>) :
+class PublicationsAdapter(val publications: kotlin.collections.List<Publication>) :
     RecyclerView.Adapter<PublicationsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PublicationsViewHolder {
