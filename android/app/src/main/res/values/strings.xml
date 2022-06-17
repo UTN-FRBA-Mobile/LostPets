@@ -25,7 +25,10 @@
     <!-- Facebook Login -->
     <string name="facebook_app_id">facebook_app_id</string>
     <string name="fb_login_protocol_scheme">fb_login_protocol_scheme</string>
-    <string name="facebook_client_token">facebook_client_token</string>
+    <string name="facebook_client_token">facebook_client_token</string>contactoTextView
+
+    <!-- Ítem Publicación -->
+    <string name="contactoTextView">Contacto:</string>
 
 
 </resources>

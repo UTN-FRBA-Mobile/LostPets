@@ -4,9 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.utn.lostpets.R
-import com.utn.lostpets.dataclass.PublicationsResponse
 import com.utn.lostpets.model.Publication
-import java.util.List
 
 class PublicationsAdapter(val publications: kotlin.collections.List<Publication>) :
     RecyclerView.Adapter<PublicationsViewHolder>() {
@@ -17,8 +15,7 @@ class PublicationsAdapter(val publications: kotlin.collections.List<Publication>
     }
 
     override fun onBindViewHolder(holder: PublicationsViewHolder, position: Int) {
-        val foto = publications[position].foto
-        holder.bind(foto)
+        holder.bind(publications[position], position + 2)
     }
 
     override fun getItemCount(): Int = publications.size
