@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.utn.lostpets.adapters.PublicationsAdapter
 import com.utn.lostpets.databinding.FragmentPublicationsBinding
@@ -44,7 +45,6 @@ class PublicationsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         initRecyclerView()
     }
 
@@ -66,6 +66,8 @@ class PublicationsFragment : Fragment() {
     private fun searchByDescripcion(query: String) {
         /* Creamos un hilo secundario para solicitar las publicaciones y sus respectivas fotos */
         CoroutineScope(Dispatchers.IO).launch {
+
+            binding.loader.progressBar.visibility = View.VISIBLE
 
             /* Solicitamos las fotos */
             val call = getRetrofit().create(ApiPublicationsService::class.java).getPublications("$apiUrl")
@@ -103,6 +105,7 @@ class PublicationsFragment : Fragment() {
                 } else {
                     showError()
                 }
+                binding.loader.progressBar.visibility = View.GONE
             }
         }
     }

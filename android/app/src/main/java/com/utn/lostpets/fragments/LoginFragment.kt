@@ -62,7 +62,7 @@ class LoginFragment : Fragment() {
         /* Acción de "Acceder" */
         binding.loginButtom.setOnClickListener {
             if (binding.emailEditText.text.isNotEmpty() && binding.passwordEditText.text.isNotEmpty())
-            /* Le pasamos mail y pass a Firebase que se encargará de autenticar al usuario */
+                /* Le pasamos mail y pass a Firebase que se encargará de autenticar al usuario */
                 FirebaseAuth.getInstance().signInWithEmailAndPassword(binding.emailEditText.text.toString(), binding.passwordEditText.text.toString())
                     .addOnCompleteListener {
                         if (it.isSuccessful) {
@@ -75,6 +75,7 @@ class LoginFragment : Fragment() {
 
         /* Acción de "Acceder con Google" */
         binding.googleButton.setOnClickListener{
+
             val googleConf : GoogleSignInOptions =
                 GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                     .requestIdToken(getString(R.string.default_web_client_id))
