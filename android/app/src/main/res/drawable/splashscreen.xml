@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@color/white"/>
-    <item>
-        <bitmap android:src="@mipmap/ic_launcher"
-            android:gravity="center"/>
+    <item android:drawable="@color/cremita"/>
+    <item android:bottom="300dp" android:top="200dp">
+        <bitmap
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:maxWidth="60dp"
+            android:layout_gravity="center"
+            android:maxHeight="60dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/icono"/>
+    </item>
+    <item android:top="350dp">
+        <bitmap
+            android:gravity="center"
+            android:tint="@android:color/black"
+            android:src="@drawable/titulo"/>
     </item>
 </layer-list>
