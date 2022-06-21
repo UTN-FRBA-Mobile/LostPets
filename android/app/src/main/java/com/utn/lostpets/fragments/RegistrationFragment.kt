@@ -67,7 +67,7 @@ class RegistrationFragment : Fragment() {
     /* Redirigimos a pantalla principal en caso de login exitoso */
     private fun showHome(email: String) {
         val bundle = bundleOf("email" to email)
-        val action = R.id.action_registrationFragment_to_mapsFragment
+        val action = R.id.action_registrationFragment_to_introSliderFragment
         findNavController().navigate(action, bundle)
     }
 }

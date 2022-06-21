@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_loginFragment_to_registrationFragment"
             app:destination="@id/registrationFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_introSliderFragment"
+            app:destination="@id/introSliderFragment" />
     </fragment>
     <fragment
         android:id="@+id/mapsFragment"
@@ -40,10 +43,37 @@
         <action
             android:id="@+id/action_registrationFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_registrationFragment_to_introSliderFragment"
+            app:destination="@id/introSliderFragment" />
     </fragment>
     <fragment
         android:id="@+id/publicationsFragment"
         android:name="com.utn.lostpets.fragments.PublicationsFragment"
         android:label="fragment_publications"
         tools:layout="@layout/fragment_publications" />
+    <fragment
+        android:id="@+id/intro1Fragment"
+        android:name="com.utn.lostpets.fragments.Intro1Fragment"
+        android:label="fragment_intro1"
+        tools:layout="@layout/fragment_intro1" />
+    <fragment
+        android:id="@+id/intro2Fragment"
+        android:name="com.utn.lostpets.fragments.Intro2Fragment"
+        android:label="fragment_intro2"
+        tools:layout="@layout/fragment_intro2" />
+    <fragment
+        android:id="@+id/intro3Fragment"
+        android:name="com.utn.lostpets.fragments.Intro3Fragment"
+        android:label="fragment_intro3"
+        tools:layout="@layout/fragment_intro3" />
+    <fragment
+        android:id="@+id/introSliderFragment"
+        android:name="com.utn.lostpets.fragments.IntroSliderFragment"
+        android:label="fragment_intro_slider"
+        tools:layout="@layout/fragment_intro_slider" >
+        <action
+            android:id="@+id/action_introSliderFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+    </fragment>
 </navigation>

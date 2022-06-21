@@ -41,4 +41,15 @@
     <string name="timeRecent">un instante</string>
 
 
+    <!-- Intro Slider -->
+    <string name="text_intro1">Bienvenido a LostPets</string>
+    <string name="text_intro2">¿Perdiste a tu perro?</string>
+    <string name="text_intro3">¿Encontraste a un gato?</string>
+    <string name="desc_intro1">Una aplicación pensada para los animales</string>
+    <string name="desc_intro2">Podes publicarlo para que los usuarios de tu zona puedan verlo!</string>
+    <string name="desc_intro3">Podes publicarlo para ayudar al dueño a encontrarlo!</string>
+    <string name="next">Siguiente</string>
+    <string name="start">Comenzar!</string>
+    <string name="skip">Saltar</string>
+
 </resources>
