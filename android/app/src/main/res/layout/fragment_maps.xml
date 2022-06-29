@@ -62,5 +62,20 @@ tools:context=".fragments.MapsFragment" >
                 app:menu="@menu/bottom_navigation_menu"
                 android:theme="@style/Theme.MaterialComponents.Light"/>
         </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="330dp"
+            android:layout_height="227dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:orientation="vertical">
+
+            <Button
+                android:layout_centerHorizontal="true"
+                android:id="@+id/agregarPublicacionButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+        </RelativeLayout>
     </RelativeLayout>
 </FrameLayout>

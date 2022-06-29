@@ -31,6 +31,9 @@
         <action
             android:id="@+id/action_mapsFragment_to_publicationsFragment"
             app:destination="@id/publicationsFragment" />
+        <action
+            android:id="@+id/action_mapsFragment_to_publicarEnontradoPerdidoFragment"
+            app:destination="@id/publicarEnontradoPerdidoFragment" />
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
@@ -76,4 +79,9 @@
             android:id="@+id/action_introSliderFragment_to_mapsFragment"
             app:destination="@id/mapsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/publicarEnontradoPerdidoFragment"
+        android:name="com.utn.lostpets.PublicarEnontradoPerdidoFragment"
+        android:label="fragment_publicar_enontrado_perdido"
+        tools:layout="@layout/fragment_publicar_enontrado_perdido" />
 </navigation>
