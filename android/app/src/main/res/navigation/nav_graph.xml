@@ -81,7 +81,7 @@
     </fragment>
     <fragment
         android:id="@+id/publicarEnontradoPerdidoFragment"
-        android:name="com.utn.lostpets.PublicarEnontradoPerdidoFragment"
+        android:name="com.utn.lostpets.fragments.PublicarEnontradoPerdidoFragment"
         android:label="fragment_publicar_enontrado_perdido"
         tools:layout="@layout/fragment_publicar_enontrado_perdido" />
 </navigation>
