@@ -5,162 +5,201 @@
     android:layout_height="match_parent"
     tools:context=".fragments.PublicarEnontradoPerdidoFragment">
 
-    <RelativeLayout
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/ScrollView01"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:fillViewport="true"
+        android:scrollbars="none" >
 
-        <RelativeLayout
-            android:layout_width="380dp"
-            android:layout_height="177dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="25dp"
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="vertical">
-
-            <EditText
-                android:id="@+id/descripcionEditText"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:layout_marginStart="0dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="30dp"
-                android:width="10dp"
-                android:background="@android:drawable/editbox_background"
-                android:hint="Descripción"
-                android:minHeight="400dp"
-                android:textColorHint="@color/dark_gray"
-                android:textSize="18dp" />
+                android:layout_height="100sp"
+                android:layout_centerHorizontal="true">
 
-            <TextView
-                android:id="@+id/descripcionTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="10dp"
-                android:text="Ingresá una descripción"
-                android:textColor="@color/black"
-                android:textSize="16dp" />
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="380dp"
-            android:layout_height="227dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="170dp"
-            android:orientation="vertical">
+                <ImageView
+                    android:layout_width="75sp"
+                    android:layout_height="750sp"
+                    android:layout_marginLeft="30sp"
+                    android:clickable="true"
+                    android:src="@drawable/go_back_arrow" />
 
-            <EditText
-                android:id="@+id/contactoEditText"
+                <TextView
+                    android:id="@+id/tipoPublicacionTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="33sp"
+                    android:layout_marginLeft="130sp"
+                    android:text="CARGAR PERDIDO"
+                    android:textColor="@color/black"
+                    android:textSize="30sp" />
+
+            </RelativeLayout>
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:layout_marginStart="0dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="30dp"
-                android:width="10dp"
-                android:background="@android:drawable/editbox_background"
-                android:hint="Contacto"
-                android:minHeight="70dp"
-                android:textColorHint="@color/dark_gray"
-                android:textSize="18dp" />
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginTop="50sp">
 
-            <TextView
-                android:id="@+id/contactoTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="10dp"
-                android:text="Ingresá datos de contacto"
-                android:textColor="@color/black"
-                android:textSize="16dp" />
+                <RelativeLayout
+                    android:layout_width="380sp"
+                    android:layout_height="177sp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="75sp"
+                    android:orientation="vertical">
 
+                    <EditText
+                        android:id="@+id/descripcionEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="120sp"
+                        android:layout_marginStart="0sp"
+                        android:layout_marginLeft="5sp"
+                        android:layout_marginTop="30sp"
+                        android:layout_marginEnd="30sp"
+                        android:width="10sp"
+                        android:background="@android:drawable/editbox_background"
+                        android:hint="Descripción"
+                        android:minHeight="400sp"
+                        android:textColorHint="@color/dark_gray"
+                        android:textColor="@color/black"
+                        android:textSize="18dp" />
+
+                    <TextView
+                        android:id="@+id/descripcionTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="10sp"
+                        android:text="Ingresá una descripción"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="380dp"
+                    android:layout_height="227dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="220dp"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/contactoEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginEnd="30dp"
+                        android:width="10dp"
+                        android:background="@android:drawable/editbox_background"
+                        android:hint="Contacto"
+                        android:minHeight="70dp"
+                        android:textColorHint="@color/dark_gray"
+                        android:textSize="18dp"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:id="@+id/contactoTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="10dp"
+                        android:text="Ingresá datos de contacto"
+                        android:textColor="@color/black"
+                        android:textSize="16dp" />
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="380dp"
+                    android:layout_height="127dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="400dp">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/cargarImagenButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="75dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="35dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_background"
+                        android:drawablePadding="10dp"
+                        android:text="Cargar Imagen"
+                        android:textColor="@color/black"
+                        android:textSize="22dp" />
+
+                    <TextView
+                        android:id="@+id/cargarImagenTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="10dp"
+                        android:text="Cargá una foto"
+                        android:textColor="@color/black"
+                        android:textSize="16dp" />
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="380dp"
+                    android:layout_height="127dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="520dp">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/cargarUbicacionButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="75dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="35dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_background"
+                        android:drawablePadding="10dp"
+                        android:text="Señalar Lugar"
+                        android:textColor="@color/black"
+                        android:layout_centerHorizontal="true"
+                        android:textSize="22dp"/>
+
+                    <TextView
+                        android:id="@+id/cargarUbicacionTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="10dp"
+                        android:text="Indicá el Lugar"
+                        android:textColor="@color/black"
+                        android:textSize="16dp" />
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="300dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="650dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="50dp">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/publicarButton"
+                        android:layout_width="420dp"
+                        android:layout_height="60dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="35dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_background"
+                        android:drawablePadding="10dp"
+                        android:text="PUBLICAR"
+                        android:textColor="@color/black"
+                        android:textSize="29dp"/>
+                </RelativeLayout>
+
+            </RelativeLayout>
         </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="380dp"
-            android:layout_height="127dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="350dp">
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/cargarImagenButton"
-                android:layout_width="match_parent"
-                android:layout_height="75dp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="35dp"
-                android:layout_weight="1"
-                android:background="@drawable/button_background"
-                android:drawablePadding="10dp"
-                android:text="Cargar Imagen"
-                android:textColor="@color/black"
-                android:textSize="22dp" />
-
-            <TextView
-                android:id="@+id/cargarImagenTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="10dp"
-                android:text="Cargá una foto"
-                android:textColor="@color/black"
-                android:textSize="16dp" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="380dp"
-            android:layout_height="127dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="500dp">
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/cargarUbicacionButton"
-                android:layout_width="match_parent"
-                android:layout_height="75dp"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="35dp"
-                android:layout_weight="1"
-                android:background="@drawable/button_background"
-                android:drawablePadding="10dp"
-                android:text="Señalar Lugar"
-                android:textColor="@color/black"
-                android:layout_centerHorizontal="true"
-                android:textSize="22dp"/>
-
-            <TextView
-                android:id="@+id/cargarUbicacionTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="10dp"
-                android:text="Indicá el Lugar"
-                android:textColor="@color/black"
-                android:textSize="16dp" />
-
-        </RelativeLayout>
-
-
-        <RelativeLayout
-            android:layout_width="300dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="650dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="50dp">
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/publicarButton"
-                android:layout_width="420dp"
-                android:layout_height="60dp"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="35dp"
-                android:layout_weight="1"
-                android:background="@drawable/button_background"
-                android:drawablePadding="10dp"
-                android:text="PUBLICAR"
-                android:textColor="@color/black"
-                android:textSize="29dp"/>
-        </RelativeLayout>
-
-    </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
 </FrameLayout>
