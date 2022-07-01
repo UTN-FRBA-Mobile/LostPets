@@ -54,7 +54,7 @@ class PublicarEnontradoPerdidoFragment : Fragment() {
 
     private fun setup() {
         /* Se vuelve a la pantalla de "Login" en caso de cerrarse la sesión */
-        binding.encontradoButton.setOnClickListener {
+        binding.publicarButton.setOnClickListener {
             /* Creamos un hilo secundario para solicitar las publicaciones y sus respectivas fotos */
             CoroutineScope(Dispatchers.IO).launch {
                 var publiFinal = PublicationDTO(
