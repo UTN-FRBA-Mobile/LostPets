@@ -5,6 +5,11 @@
     <!-- Comunicación con API Rest, Facebook Login -->
     <uses-permission android:name="android.permission.INTERNET"/>
 
+    <!-- Para subir foto de animal encontrado/perdido, ya sea de la camara o galería -->
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
     <!-- android:usesCleartextTraffic="true" Para poder usar localhost como server, desactivar en PROD -->
     <application
         android:usesCleartextTraffic="true"

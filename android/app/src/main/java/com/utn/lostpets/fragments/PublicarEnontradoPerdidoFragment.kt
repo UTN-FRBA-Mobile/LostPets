@@ -1,11 +1,16 @@
 package com.utn.lostpets.fragments
 
+import android.app.Activity.RESULT_OK
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.utn.lostpets.databinding.FragmentPublicarEnontradoPerdidoBinding
 import com.utn.lostpets.dto.PublicationDTO
 import com.utn.lostpets.interfaces.ApiPublicationsService
@@ -14,6 +19,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class PublicarEnontradoPerdidoFragment : Fragment() {
@@ -22,6 +29,7 @@ class PublicarEnontradoPerdidoFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val apiUrl = "http://www.mengho.link/publications/publicacion/";
+    private var publicationImage: Bitmap? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,15 +62,22 @@ class PublicarEnontradoPerdidoFragment : Fragment() {
 
     private fun setup() {
         /* Se vuelve a la pantalla de "Login" en caso de cerrarse la sesión */
+
         binding.publicarButton.setOnClickListener {
             /* Creamos un hilo secundario para solicitar las publicaciones y sus respectivas fotos */
             CoroutineScope(Dispatchers.IO).launch {
+                var descripcion = binding.descripcionEditText.text.toString();
+                var contacto = binding.contactoEditText.text.toString();
+                val sdf = SimpleDateFormat("yyyy-MM-dd hh:mm:ss")
+                val fecha = sdf.format(Date())
+                var imageBitmapString = publicationImage!!.toString()
+
                 var publiFinal = PublicationDTO(
                     "carlos@gmail.com",
-                    "Primera Prueba",
-                    "Tel 123456789",
-                    "2022-06-03 12:00:00",
-                    "https://t1.ea.ltmcdn.com/es/posts/7/9/5/por_que_las_gatas_se_comen_a_sus_gatitos_recien_nacidos_22597_600.jpg",
+                    descripcion,
+                    contacto,
+                    fecha,
+                    imageBitmapString,
                     -34.639757,
                     -58.452142,
                     true,
@@ -88,19 +103,29 @@ class PublicarEnontradoPerdidoFragment : Fragment() {
             }
 
         }
+
+        binding.cargarImagenButton.setOnClickListener{
+            dispatchTakePictureIntent()
+        }
     }
 
+    val REQUEST_CODE = 42
+
+    private fun dispatchTakePictureIntent() {
+        val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        if (takePictureIntent.resolveActivity(requireActivity()!!.packageManager) != null){
+            startActivityForResult(takePictureIntent,REQUEST_CODE)
+        } else{
+            //Toast.makeText(this,"Unable to open camera",Toast.LENGTH_SHORT)
+        }
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+            val imageBitmap = data?.extras?.get("data") as Bitmap
+            publicationImage = imageBitmap
+            binding.cargarImagenImageView.setImageBitmap(imageBitmap)
+        }
+    }
 }
-
-/*
-    "usuario":"nicoomelnyk@gmail.com",
-    "descripcion":"Animal perdido",
-    "contacto":"Tel 123456789",
-    "fecha_publicacion":"2022-06-03 12:00:00",
-    "foto":"https://t1.ea.ltmcdn.com/es/posts/7/9/5/por_que_las_gatas_se_comen_a_sus_gatitos_recien_nacidos_22597_600.jpg",
-    "latitud":-34.639757,
-    "longitud":-58.452142,
-    "es_perdido":true,
-    "activo":true
-
- */
