@@ -2,10 +2,10 @@ package com.utn.lostpets.fragments
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Base64.encodeToString
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +19,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -70,14 +71,14 @@ class PublicarEnontradoPerdidoFragment : Fragment() {
                 var contacto = binding.contactoEditText.text.toString();
                 val sdf = SimpleDateFormat("yyyy-MM-dd hh:mm:ss")
                 val fecha = sdf.format(Date())
-                var imageBitmapString = publicationImage!!.toString()
+                var imageBitmapString = bitMapToString(publicationImage!!)
 
                 var publiFinal = PublicationDTO(
                     "carlos@gmail.com",
                     descripcion,
                     contacto,
                     fecha,
-                    imageBitmapString,
+                    imageBitmapString!!,
                     -34.639757,
                     -58.452142,
                     true,
@@ -127,5 +128,12 @@ class PublicarEnontradoPerdidoFragment : Fragment() {
             publicationImage = imageBitmap
             binding.cargarImagenImageView.setImageBitmap(imageBitmap)
         }
+    }
+
+    fun bitMapToString(bitmap: Bitmap): String? {
+        val baos = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos)
+        val b: ByteArray = baos.toByteArray()
+        return Base64.getEncoder().encodeToString(b)
     }
 }
