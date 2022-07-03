@@ -8,9 +8,6 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
         android:orientation="vertical">
 
         <TextView
@@ -20,9 +17,9 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="80dp"
-            android:text="@string/login"
+            android:text="@string/loginTextView"
             android:textColor="@color/black"
-            android:textSize="20dp" />
+            android:textSize="23dp" />
 
         <RelativeLayout
             android:layout_width="330dp"
@@ -39,14 +36,13 @@
                 android:layout_marginTop="160dp"
                 android:layout_weight="1"
                 android:background="@drawable/button_background"
-                android:textColor="@color/black"
-                android:text="Acceder" />
+                android:text="@string/botonAcceder"
+                android:textColor="@color/black" />
 
             <ImageView
                 android:id="@+id/login_bgd"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_centerInParent="true"
                 android:src="@drawable/login_rectangle" />
 
             <EditText
@@ -56,13 +52,14 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="30dp"
+                android:width="10dp"
                 android:autofillHints=""
                 android:ems="10"
-                android:hint="Ingrese su email"
+                android:hint="@string/inputMail"
                 android:inputType="textEmailAddress"
                 android:minHeight="48dp"
                 android:textColorHint="@color/black"
-                android:width="10dp"/>
+                android:textSize="16dp"/>
 
             <EditText
                 android:id="@+id/passwordEditText"
@@ -72,38 +69,58 @@
                 android:layout_marginTop="100dp"
                 android:layout_marginEnd="30dp"
                 android:ems="10"
-                android:hint="Ingrese su Contraseña"
+                android:hint="@string/inputPassword"
                 android:inputType="textPassword"
                 android:minHeight="48dp"
-                android:textColorHint="@color/black" />
+                android:textColorHint="@color/black"
+                android:textSize="16dp" />
 
         </RelativeLayout>
 
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/googleButton"
-            android:layout_width="190dp"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="100dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="50dp"
             android:layout_marginTop="400dp"
-            android:background="@color/white"
+            android:layout_marginBottom="170dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_background"
             android:drawableStart="@mipmap/google"
-            android:text="Iniciar con Google"
+            android:drawablePadding="10dp"
+            android:text="@string/botonGoogle"
+            android:textColor="@color/black" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/facebookButtom"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="470dp"
+            android:layout_marginBottom="170dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_background"
+            android:drawableStart="@mipmap/facebook"
+            android:drawablePadding="10dp"
+            android:text="@string/botonFacebook"
             android:textColor="@color/black" />
 
         <RelativeLayout
             android:layout_width="183dp"
             android:layout_height="249dp"
-            android:layout_marginStart="100dp"
-            android:layout_marginTop="600dp"
-            android:layout_marginEnd="50dp">
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="600dp">
 
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
+                android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
-                android:text="No tenés cuenta?"
+                android:text="@string/labelRegistro"
                 android:textColor="@color/black" />
 
             <androidx.appcompat.widget.AppCompatButton
@@ -115,8 +132,8 @@
                 android:layout_weight="1"
                 android:background="@drawable/button_background"
                 android:drawablePadding="10dp"
-                android:textColor="@color/black"
-                android:text="Registrarse" />
+                android:text="@string/botonRegistrarse"
+                android:textColor="@color/black" />
         </RelativeLayout>
 
     </RelativeLayout>

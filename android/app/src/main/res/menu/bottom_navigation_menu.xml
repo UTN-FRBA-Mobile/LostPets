@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/search"
+        android:enabled="true"
+        android:icon="@drawable/magnifyingglass"
+        android:title="Buscar"/>
+    <item
+        android:id="@+id/publications"
+        android:enabled="true"
+        android:icon="@drawable/checklist"
+        android:title="Publicaciones"/>
+    <item
+        android:id="@+id/profile"
+        android:enabled="true"
+        android:icon="@drawable/user"
+        android:title="Perfil"/>
+</menu>

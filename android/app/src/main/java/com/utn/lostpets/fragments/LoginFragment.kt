@@ -11,10 +11,16 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.utn.lostpets.MainActivity
@@ -26,7 +32,10 @@ class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
+    /* Google sign in */
     private val GOOGLE_SIGN_IN = 100
+    /* Facebook sign in */
+    private val callbackManager = CallbackManager.Factory.create()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,18 +53,10 @@ class LoginFragment : Fragment() {
 
     private fun setup() {
 
-        /* Acción de "Registrarse" */
+        /* Acción de ir a "Registrarse" */
         binding.signUpButtom.setOnClickListener {
-            if (binding.emailEditText.text.isNotEmpty() && binding.passwordEditText.text.isNotEmpty())
-            /* Le pasamos mail y pass a Firebase que se encargará de autenticar al usuario */
-                FirebaseAuth.getInstance().createUserWithEmailAndPassword(binding.emailEditText.text.toString(), binding.passwordEditText.text.toString())
-                    .addOnCompleteListener {
-                        if (it.isSuccessful) {
-                            showHome(it.result?.user?.email ?: "")
-                        } else {
-                            showAlert()
-                        }
-                    }
+            val action = R.id.action_loginFragment_to_registrationFragment
+            findNavController().navigate(action)
         }
 
         /* Acción de "Acceder" */
@@ -86,9 +87,49 @@ class LoginFragment : Fragment() {
 
             startActivityForResult(googleClient.signInIntent, GOOGLE_SIGN_IN)
         }
+
+        /* Acción de "Acceder con Facebook" */
+        binding.facebookButtom.setOnClickListener{
+
+            LoginManager.getInstance().logInWithReadPermissions(getActivity(), listOf("email"))
+
+            LoginManager.getInstance().registerCallback(callbackManager,
+                object : FacebookCallback<LoginResult> {
+
+                    override fun onSuccess(result: LoginResult?) {
+
+                        result?.let {
+                            val token = it.accessToken
+
+                            val credential = FacebookAuthProvider.getCredential(token.token)
+
+                            FirebaseAuth.getInstance().signInWithCredential(credential)
+                                .addOnCompleteListener {
+                                    if (it.isSuccessful) {
+                                        showHome(it.result?.user?.email ?: "")
+                                    } else {
+                                        showAlert()
+                                    }
+                                }
+                        }
+                    }
+
+                    override fun onCancel() {
+                        TODO("Not yet implemented")
+                    }
+
+                    override fun onError(error: FacebookException?) {
+                        showAlert()
+                    }
+                })
+        }
     }
 
+    /* Hace el intento de login con Google */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+        callbackManager.onActivityResult(requestCode, resultCode, data)
+
         super.onActivityResult(requestCode, resultCode, data)
 
         if(requestCode == GOOGLE_SIGN_IN) {

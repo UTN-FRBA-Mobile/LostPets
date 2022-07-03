@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_loginFragment_to_mapsFragment"
             app:destination="@id/mapsFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_registrationFragment"
+            app:destination="@id/registrationFragment" />
     </fragment>
     <fragment
         android:id="@+id/mapsFragment"
@@ -22,5 +25,25 @@
         <action
             android:id="@+id/action_mapsFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_mapsFragment_to_publicationsFragment"
+            app:destination="@id/publicationsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/registrationFragment"
+        android:name="com.utn.lostpets.fragments.RegistrationFragment"
+        android:label="fragment_registration"
+        tools:layout="@layout/fragment_registration" >
+        <action
+            android:id="@+id/action_registrationFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+        <action
+            android:id="@+id/action_registrationFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/publicationsFragment"
+        android:name="com.utn.lostpets.fragments.PublicationsFragment"
+        android:label="fragment_publications"
+        tools:layout="@layout/fragment_publications" />
 </navigation>
