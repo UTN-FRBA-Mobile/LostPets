@@ -63,6 +63,9 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
                     true
                 }
                 R.id.profile -> {
+                    val bundle = bundleOf("email" to email)
+                    val action = R.id.action_mapsFragment_to_profileFragment
+                    findNavController().navigate(action,bundle)
                     true
                 }
                 R.id.search -> {

@@ -112,6 +112,11 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_mapsFragment_to_profileFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_mapsFragment_to_publicationsFragment">
                               <value>
                                 <LayoutPositions />
@@ -145,6 +150,11 @@
                         </option>
                         <option name="myPositions">
                           <map>
+                            <entry key="action_registrationFragment_to_introSliderFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_registrationFragment_to_loginFragment">
                               <value>
                                 <LayoutPositions />
