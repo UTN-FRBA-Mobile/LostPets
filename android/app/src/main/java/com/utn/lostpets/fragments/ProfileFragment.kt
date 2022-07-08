@@ -1,6 +1,5 @@
 package com.utn.lostpets.fragments
 
-import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,8 +10,6 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.facebook.login.LoginManager
-import com.google.firebase.auth.FirebaseAuth
 import com.utn.lostpets.R
 import com.utn.lostpets.adapters.PublicationsAdapter
 import com.utn.lostpets.databinding.FragmentProfileBinding
@@ -21,6 +18,7 @@ import com.utn.lostpets.interfaces.ApiPublicationsService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import com.utn.lostpets.model.Publication
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -30,9 +28,11 @@ class ProfileFragment : Fragment() {
     private val binding get() = _binding!!
     private var email: String = ""
 
+    private val apiUrl = "http://www.mengho.link/publications/";
+
     /* Adapter para listar publicaciones */
     private lateinit var adapter: PublicationsAdapter
-    private val publicationsImages = mutableListOf<PublicationsResponse>()
+    private val publicaciones = mutableListOf<Publication>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,7 +51,7 @@ class ProfileFragment : Fragment() {
 
     /* Inicialización Recycler View */
     private fun initRecyclerView() {
-        adapter = PublicationsAdapter(publicationsImages)
+        adapter = PublicationsAdapter(publicaciones)
         binding.listaPublicaciones.layoutManager = LinearLayoutManager(activity)
         binding.listaPublicaciones.adapter = adapter
         searchByDescripcion("")
@@ -59,7 +59,7 @@ class ProfileFragment : Fragment() {
 
     private fun getRetrofit() : Retrofit {
         return Retrofit.Builder()
-            .baseUrl("http://www.mengho.link/publications/$email")
+            .baseUrl("$apiUrl/$email")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
@@ -71,8 +71,8 @@ class ProfileFragment : Fragment() {
             val publications = call.body()
             activity?.runOnUiThread {
                 if(call.isSuccessful) {
-                    publicationsImages.clear()
-                    publicationsImages.addAll(publications ?: emptyList())
+                    publicaciones.clear()
+                    publicaciones.addAll(publications ?: emptyList())
                     adapter.notifyDataSetChanged()
                 } else {
                     showError()
