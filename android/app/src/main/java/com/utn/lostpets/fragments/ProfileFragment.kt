@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -15,11 +16,23 @@ import com.google.firebase.auth.FirebaseAuth
 import com.utn.lostpets.R
 import com.utn.lostpets.adapters.PublicationsAdapter
 import com.utn.lostpets.databinding.FragmentProfileBinding
+import com.utn.lostpets.dataclass.PublicationsResponse
+import com.utn.lostpets.interfaces.ApiPublicationsService
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class ProfileFragment : Fragment() {
 
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
+    private var email: String = ""
+
+    /* Adapter para listar publicaciones */
+    private lateinit var adapter: PublicationsAdapter
+    private val publicationsImages = mutableListOf<PublicationsResponse>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,10 +51,38 @@ class ProfileFragment : Fragment() {
 
     /* Inicialización Recycler View */
     private fun initRecyclerView() {
-//        adapter = PublicationsAdapter(publicationsImages)
-//        binding.listaPublicaciones.layoutManager = LinearLayoutManager(activity)
-//        binding.listaPublicaciones.adapter = adapter
-//        searchByDescripcion("")
+        adapter = PublicationsAdapter(publicationsImages)
+        binding.listaPublicaciones.layoutManager = LinearLayoutManager(activity)
+        binding.listaPublicaciones.adapter = adapter
+        searchByDescripcion("")
+    }
+
+    private fun getRetrofit() : Retrofit {
+        return Retrofit.Builder()
+            .baseUrl("http://www.mengho.link/publications/$email")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
+    private fun searchByDescripcion(query: String) {
+        /* Creamos un hilo secundario para solicitar las publicaciones*/
+        CoroutineScope(Dispatchers.IO).launch {
+            val call = getRetrofit().create(ApiPublicationsService::class.java).getPublications("http://www.mengho.link/publications/")
+            val publications = call.body()
+            activity?.runOnUiThread {
+                if(call.isSuccessful) {
+                    publicationsImages.clear()
+                    publicationsImages.addAll(publications ?: emptyList())
+                    adapter.notifyDataSetChanged()
+                } else {
+                    showError()
+                }
+            }
+        }
+    }
+
+    private fun showError() {
+        Toast.makeText(activity, "Ha ocurrido un error al solicitar las publicaciones", Toast.LENGTH_SHORT).show()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
