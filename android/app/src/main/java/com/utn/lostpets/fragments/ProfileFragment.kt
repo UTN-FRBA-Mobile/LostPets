@@ -9,12 +9,14 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.utn.lostpets.R
-import com.utn.lostpets.databinding.FragmentLoginBinding
+import com.utn.lostpets.adapters.PublicationsAdapter
+import com.utn.lostpets.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
 
-    private var _binding: FragmentLoginBinding? = null
+    private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -22,32 +24,26 @@ class ProfileFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentLoginBinding.inflate(inflater, container, false)
+        _binding = FragmentProfileBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        initRecyclerView()
+    }
+
+    /* Inicialización Recycler View */
+    private fun initRecyclerView() {
+//        adapter = PublicationsAdapter(publicationsImages)
+//        binding.listaPublicaciones.layoutManager = LinearLayoutManager(activity)
+//        binding.listaPublicaciones.adapter = adapter
+//        searchByDescripcion("")
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-    /* Mostramos alerta en caso de que haya fallado la autenticación */
-    private fun showAlert() {
-        val builder = AlertDialog.Builder(getActivity())
-        builder.setTitle("Error")
-        builder.setMessage("Se ha producido un error autenticando al usuario")
-        builder.setPositiveButton("Aceptar", null)
-        val dialog: AlertDialog = builder.create()
-        dialog.show()
-    }
-
-    /* Redirigimos a pantalla principal en caso de login exitoso */
-    private fun showHome(email: String) {
-        val bundle = bundleOf("email" to email)
-        val action = R.id.action_loginFragment_to_mapsFragment
-        findNavController().navigate(action, bundle)
-    }
 }

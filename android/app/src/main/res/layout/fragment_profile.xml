@@ -3,18 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.LoginFragment"
-    android:background="#BBD2EB">
-
+    tools:context=".fragments.ProfileFragment">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
         android:orientation="vertical">
-
-
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -80,5 +73,20 @@
                 />
 
         </RelativeLayout>
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottom_navigation"
+                style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFFFFF"
+                app:menu="@menu/bottom_navigation_menu" />
+        </LinearLayout>
     </RelativeLayout>
 </FrameLayout>

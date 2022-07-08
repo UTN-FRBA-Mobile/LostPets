@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_mapsFragment_to_publicationsFragment"
             app:destination="@id/publicationsFragment" />
+        <action
+            android:id="@+id/action_mapsFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
@@ -46,4 +49,9 @@
         android:name="com.utn.lostpets.fragments.PublicationsFragment"
         android:label="fragment_publications"
         tools:layout="@layout/fragment_publications" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.utn.lostpets.fragments.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>
