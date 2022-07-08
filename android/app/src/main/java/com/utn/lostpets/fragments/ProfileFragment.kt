@@ -1,5 +1,6 @@
 package com.utn.lostpets.fragments
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -72,7 +73,7 @@ class ProfileFragment : Fragment() {
             activity?.runOnUiThread {
                 if(call.isSuccessful) {
                     publicaciones.clear()
-                    publicaciones.addAll(publications ?: emptyList())
+                    publicaciones.addAll(publicaciones ?: emptyList())
                     adapter.notifyDataSetChanged()
                 } else {
                     showError()
