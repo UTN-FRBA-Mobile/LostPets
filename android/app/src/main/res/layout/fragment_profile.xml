@@ -5,6 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.ProfileFragment">
+    <!-- Loader -->
+    <include layout="@layout/loader"
+        android:id="@+id/loader" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -70,8 +74,6 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-
-
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/listaPublicaciones"
                     android:layout_width="413dp"
@@ -82,22 +84,30 @@
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
         </RelativeLayout>
-        <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true">
-
-            <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/bottom_navigation"
-                style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#FFFFFF"
-                app:menu="@menu/bottom_navigation_menu" />
-        </LinearLayout>
+                android:layout_alignParentBottom="true">
+
+                <com.google.android.material.bottomnavigation.BottomNavigationView
+                    android:id="@+id/bottom_navigation"
+                    style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:menu="@menu/bottom_navigation_menu"
+                    android:theme="@style/Theme.MaterialComponents.Light"/>
+            </LinearLayout>
+        </RelativeLayout>
     </RelativeLayout>
 </FrameLayout>
