@@ -10,6 +10,8 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.facebook.login.LoginManager
+import com.google.firebase.auth.FirebaseAuth
 import com.utn.lostpets.R
 import com.utn.lostpets.adapters.PublicationsAdapter
 import com.utn.lostpets.databinding.FragmentProfileBinding
@@ -30,7 +32,7 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        setup()
         initRecyclerView()
     }
 
@@ -45,5 +47,28 @@ class ProfileFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
     }
+    private fun setup() {
+        binding.bottomNavigation.setOnItemSelectedListener { item ->
+            when(item.itemId) {
+                /* Voy a pantalla de publis */
+                R.id.publications -> {
+                    val bundle = bundleOf("email" to email)
+                    val action = R.id.action_mapsFragment_to_publicationsFragment
+                    findNavController().navigate(action,bundle)
+                    true
+                }
+                R.id.profile -> {
+                    val bundle = bundleOf("email" to email)
+                    val action = R.id.action_mapsFragment_to_profileFragment
+                    findNavController().navigate(action,bundle)
+                    true
+                }
+                R.id.search -> {
+                    true
+                }
 
+                else -> false
+            }
+        }
+    }
 }
