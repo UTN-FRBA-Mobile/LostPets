@@ -47,20 +47,9 @@ tools:context=".fragments.MapsFragment" >
                 android:text="Cerrar Sesión" />
 
         </RadioGroup>
-        <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true">
 
-            <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/bottom_navigation"
-                style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:menu="@menu/bottom_navigation_menu"
-                android:theme="@style/Theme.MaterialComponents.Light"/>
-        </LinearLayout>
+        <!-- Navbar -->
+        <include layout="@layout/navbar"
+            android:id="@+id/navbar" />
     </RelativeLayout>
 </FrameLayout>

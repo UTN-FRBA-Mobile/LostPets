@@ -5,8 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.utn.lostpets.R
 import com.utn.lostpets.adapters.PublicationsAdapter
 import com.utn.lostpets.databinding.FragmentPublicationsBinding
 import com.utn.lostpets.dataclass.PublicationsResponse
@@ -55,6 +58,30 @@ class PublicationsFragment : Fragment() {
 
         binding.foundButton.setOnClickListener {
             searchByStatus(false)
+        }
+
+        /* Navbar */
+        binding.navbar.bottomNavigation.selectedItemId = R.id.publications;
+        binding.navbar.bottomNavigation.setOnItemSelectedListener { item ->
+            when(item.itemId) {
+                /* Voy a pantalla de busqueda */
+                R.id.search -> {
+                    val action = R.id.action_publicationsFragment_to_mapsFragment
+                    findNavController().navigate(action)
+                    true
+                }
+                /* Voy a pantalla de publicaciones */
+                R.id.profile -> {
+                    val action = R.id.action_publicationsFragment_to_profileFragment
+                    findNavController().navigate(action)
+                    true
+                }
+                R.id.search -> {
+                    true
+                }
+
+                else -> false
+            }
         }
     }
 

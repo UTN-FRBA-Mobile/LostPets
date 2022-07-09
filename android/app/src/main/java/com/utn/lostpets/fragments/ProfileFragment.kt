@@ -130,18 +130,20 @@ class ProfileFragment : Fragment() {
 
     private fun setup() {
 
-        binding.bottomNavigation.setOnItemSelectedListener { item ->
+        /* Navbar */
+        binding.navbar.bottomNavigation.selectedItemId = R.id.profile;
+        binding.navbar.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                /* Voy a pantalla de publis */
-                R.id.publications -> {
-                    val bundle = bundleOf("email" to email)
-                    val action = R.id.action_mapsFragment_to_publicationsFragment
-                    findNavController().navigate(action, bundle)
+                /* Voy a pantalla de busqueda */
+                R.id.search -> {
+                    val action = R.id.action_profileFragment_to_mapsFragment
+                    findNavController().navigate(action)
                     true
                 }
-                R.id.profile -> {
+                /* Voy a pantalla de publicaciones */
+                R.id.publications -> {
                     val bundle = bundleOf("email" to email)
-                    val action = R.id.action_mapsFragment_to_profileFragment
+                    val action = R.id.action_profileFragment_to_publicationsFragment
                     findNavController().navigate(action, bundle)
                     true
                 }

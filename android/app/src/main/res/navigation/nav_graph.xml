@@ -54,12 +54,26 @@
         android:id="@+id/publicationsFragment"
         android:name="com.utn.lostpets.fragments.PublicationsFragment"
         android:label="fragment_publications"
-        tools:layout="@layout/fragment_publications" />
+        tools:layout="@layout/fragment_publications" >
+        <action
+            android:id="@+id/action_publicationsFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+        <action
+            android:id="@+id/action_publicationsFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.utn.lostpets.fragments.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_publicationsFragment"
+            app:destination="@id/publicationsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/intro1Fragment"
         android:name="com.utn.lostpets.fragments.Intro1Fragment"
