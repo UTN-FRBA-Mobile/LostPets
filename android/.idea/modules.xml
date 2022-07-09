@@ -4,6 +4,9 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/LostPets.iml" filepath="$PROJECT_DIR$/.idea/modules/LostPets.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/LostPets.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/LostPets.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/LostPets.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/LostPets.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/LostPets.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/LostPets.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/LostPets.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/LostPets.app.unitTest.iml" />
     </modules>
   </component>
 </project>

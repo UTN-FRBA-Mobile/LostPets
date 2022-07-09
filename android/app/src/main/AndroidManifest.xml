@@ -5,6 +5,11 @@
     <!-- Comunicación con API Rest, Facebook Login -->
     <uses-permission android:name="android.permission.INTERNET"/>
 
+    <!-- Comunication with actual position for maps -->
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
+
     <!-- android:usesCleartextTraffic="true" Para poder usar localhost como server, desactivar en PROD -->
     <application
         android:usesCleartextTraffic="true"
