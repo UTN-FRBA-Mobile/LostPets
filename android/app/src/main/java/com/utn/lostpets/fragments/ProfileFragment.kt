@@ -17,6 +17,7 @@ import com.utn.lostpets.interfaces.ApiPublicationsService
 import com.utn.lostpets.model.Publication
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -70,7 +71,7 @@ class ProfileFragment : Fragment() {
 
     private fun searchByDescripcion(query: String) {
         /* Creamos un hilo secundario para solicitar las publicaciones y sus respectivas fotos */
-        CoroutineScope(Dispatchers.IO).launch {
+        MainScope().launch {
 
             binding.loader.progressBar.visibility = View.VISIBLE
 

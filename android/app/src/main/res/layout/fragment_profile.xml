@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="35dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -27,43 +27,15 @@
                 android:orientation="horizontal"
                 android:weightSum="2">
 
-                <RelativeLayout
+                <TextView
+                    android:id="@+id/tusPublicaciones"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:padding="2dp">
+                    android:text="@string/misPublicaciones"
+                    android:textSize="26dp"
+                    android:textColor="@color/black"/>
 
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/lostButton"
-                        android:layout_width="160dp"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-
-                        android:layout_weight="1"
-                        android:background="@drawable/lostfound_button_background"
-                        android:textColor="@color/black"
-                        android:text="Perdidos" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:padding="2dp">
-
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/foundButton"
-                        android:layout_width="160dp"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_weight="1"
-                        android:background="@drawable/lostfound_button_background"
-                        android:padding="7dp"
-                        android:text="Encontrados"
-                        android:textColor="@color/black" />
-
-                </RelativeLayout>
             </LinearLayout>
         </RelativeLayout>
 

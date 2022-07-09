@@ -52,4 +52,7 @@
     <string name="start">Comenzar!</string>
     <string name="skip">Saltar</string>
 
+    <!-- Profile -->
+    <string name="misPublicaciones">Aquí podrás ver tus publicaciones</string>
+
 </resources>

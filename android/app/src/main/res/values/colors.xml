@@ -12,7 +12,7 @@
     <color name="dark_blue">#2C384A</color>
     <color name="cremita">#F3F0D9</color>
     <color name="cremitaLoader">#80F3F0D9</color>
-    <color name="cremitaOscuro">#C9BC5B</color>
+    <color name="cremitaOscuro">#B9AD50</color>
 
     <!-- Navbar style -->
     <style name="Theme.Fab_Bottom_app_bar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
