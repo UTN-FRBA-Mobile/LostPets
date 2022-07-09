@@ -83,5 +83,11 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
                 else -> false
             }
         }
+
+        /* Acción de ir a "Publicar Encontrado/Perdido" */
+        binding.agregarPublicacionButton.setOnClickListener {
+            val action = R.id.action_mapsFragment_to_publicarEnontradoPerdidoFragment
+            findNavController().navigate(action)
+        }
     }
 }
