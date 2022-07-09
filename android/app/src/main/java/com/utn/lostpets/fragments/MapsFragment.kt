@@ -1,15 +1,20 @@
 package com.utn.lostpets.fragments
 
+import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.facebook.login.LoginManager
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.utn.lostpets.R
 import com.utn.lostpets.databinding.FragmentMapsBinding
@@ -20,6 +25,10 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     private val binding get() = _binding!!
     lateinit var map: GoogleMap
     private var email: String = ""
+
+    companion object {
+        const val REQUEST_CODE_LOCATION = 0;
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,10 +42,14 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
+        enableLocation()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val mapFragment =
+            this.childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+        mapFragment!!.getMapAsync(this)
         setup()
     }
 
@@ -71,6 +84,51 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
 
                 else -> false
             }
+        }
+    }
+
+    private fun isLocalizationPermissionGranted() = ContextCompat.checkSelfPermission(requireActivity(),
+        android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+
+    private fun enableLocation(){
+        if(!::map.isInitialized) return
+        if(isLocalizationPermissionGranted()){
+            map.isMyLocationEnabled = true;
+        }else{
+            requestLocationPermission()
+        }
+    }
+
+    private fun requestLocationPermission(){
+        if(ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(),android.Manifest.permission.ACCESS_FINE_LOCATION)) {
+            Toast.makeText(
+                requireActivity(),
+                "Por favor, habilita los permisos para acceder a la localizacion del movil.",
+                Toast.LENGTH_SHORT
+            ).show()
+        }else{
+            ActivityCompat.requestPermissions(requireActivity(), arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                MapsFragment.REQUEST_CODE_LOCATION
+            );
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        when(requestCode){
+            MapsFragment.REQUEST_CODE_LOCATION -> if(grantResults.isNotEmpty() && grantResults[0]== PackageManager.PERMISSION_GRANTED){
+                map.isMyLocationEnabled = true;
+            }else {
+                Toast.makeText(
+                    requireActivity(),
+                    "Por favor activa la localizacion del movil.",
+                    Toast.LENGTH_SHORT
+                ).show();
+            }
+            else -> {}
         }
     }
 }
