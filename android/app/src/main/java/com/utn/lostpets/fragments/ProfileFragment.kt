@@ -61,7 +61,7 @@ class ProfileFragment : Fragment() {
 
     private fun getRetrofit(): Retrofit {
         return Retrofit.Builder()
-            // TODO: descomentar y eliminar la linea que sigue
+            // TODO: descomentar y eliminar la linea que sigue al comentario
 //            .baseUrl("$apiUrl/$email/")
             .baseUrl("$apiUrl/nicoomelnyk@gmail.com/")
             .addConverterFactory(GsonConverterFactory.create())
@@ -123,25 +123,12 @@ class ProfileFragment : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
     }
 
+    private fun deletePublication(publication: Publication) {
+        if (publication.id != null) {
+        }
+    }
+
     private fun setup() {
-        binding.lostButton.setOnClickListener {
-            for (publi in publicacionesFinal) {
-                if (publi.esPerdido) {
-                    publicacionesPerdidos.add(publi)
-                }
-            }
-        }
-        binding.foundButton.setOnClickListener {
-            for (publi in publicacionesFinal) {
-                if (publi.activo) {
-                    publicacionesEncontrados.add(publi)
-                }
-            }
-            publicacionesFinal.clear()
-            publicacionesFinal.addAll(publicacionesEncontrados ?: emptyList())
-            publicacionesEncontrados.clear()
-            adapter.notifyDataSetChanged()
-        }
 
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
