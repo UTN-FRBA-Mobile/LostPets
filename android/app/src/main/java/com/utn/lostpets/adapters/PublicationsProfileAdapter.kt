@@ -11,7 +11,7 @@ class PublicationsProfileAdapter(val publications: kotlin.collections.List<Publi
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PublicationsProfileViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return PublicationsProfileViewHolder(layoutInflater.inflate(R.layout.item_publicacion, parent, false))
+        return PublicationsProfileViewHolder(layoutInflater.inflate(R.layout.item_publicacion_profile, parent, false))
     }
 
     override fun onBindViewHolder(holder: PublicationsProfileViewHolder, position: Int) {

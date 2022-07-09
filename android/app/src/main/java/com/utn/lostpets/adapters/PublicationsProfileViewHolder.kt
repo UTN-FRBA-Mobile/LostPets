@@ -3,7 +3,6 @@ package com.utn.lostpets.adapters
 import android.os.Build
 import android.view.View
 import androidx.annotation.RequiresApi
-import androidx.appcompat.widget.AppCompatButton
 import androidx.recyclerview.widget.RecyclerView
 import com.facebook.FacebookSdk.getApplicationContext
 import com.squareup.picasso.Picasso
@@ -11,6 +10,7 @@ import com.utn.lostpets.R
 import com.utn.lostpets.databinding.ItemPublicacionProfileBinding
 import com.utn.lostpets.model.Publication
 import com.utn.lostpets.utils.FechaCalculator
+
 
 class PublicationsProfileViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
@@ -25,12 +25,14 @@ class PublicationsProfileViewHolder(view: View) : RecyclerView.ViewHolder(view) 
         binding.idContacto.text = publication.contacto
         binding.idDistancia.text = resources.getString(R.string.distanceStart) + " $posicion " + resources.getString(R.string.distanceEnd)
         binding.idFecha.text = FechaCalculator.calcularDistancia(publication.fechaPublicacion)
-//        binding.editButton.setOnClickListener{
-//
-//        }
-//        binding.deleteButton.setOnClickListener{
-//
-//        }
+        binding.editButton.setOnClickListener{
+
+       }
+        binding.deleteButton.setOnClickListener{
+
+        }
         Picasso.get().load(publication.foto).into(binding.idPublicacion)
     }
+
+
 }
