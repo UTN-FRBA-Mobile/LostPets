@@ -12,9 +12,7 @@ import com.utn.lostpets.databinding.FragmentPublicationsBinding
 import com.utn.lostpets.dataclass.PublicationsResponse
 import com.utn.lostpets.interfaces.ApiPublicationsService
 import com.utn.lostpets.model.Publication
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -52,7 +50,6 @@ class PublicationsFragment : Fragment() {
 
     private fun setup() {
         binding.lostButton.setOnClickListener {
-
             searchByStatus(true)
         }
 
@@ -66,7 +63,7 @@ class PublicationsFragment : Fragment() {
         adapter = PublicationsAdapter(publicacionesFinal)
         binding.listaPublicaciones.layoutManager = LinearLayoutManager(activity)
         binding.listaPublicaciones.adapter = adapter
-//        searchByStatus(true)
+        searchByStatus(true)
     }
 
     private fun getRetrofit(): Retrofit {
@@ -78,9 +75,10 @@ class PublicationsFragment : Fragment() {
 
     private fun searchByStatus(esPerdido: Boolean) {
         /* Creamos un hilo secundario para solicitar las publicaciones y sus respectivas fotos */
-        scope.launch {
+        MainScope().launch {
 
             binding.loader.progressBar.visibility = View.VISIBLE
+            binding.listaPublicaciones.visibility = View.GONE
             var call: Response<List<PublicationsResponse>>
             /* Solicitamos las fotos */
             if (esPerdido) {
@@ -115,6 +113,7 @@ class PublicationsFragment : Fragment() {
                 }
             }
 
+
             activity?.runOnUiThread {
                 if (call.isSuccessful) {
                     publicacionesFinal.clear()
@@ -125,6 +124,7 @@ class PublicationsFragment : Fragment() {
                     showError()
                 }
                 binding.loader.progressBar.visibility = View.GONE
+                binding.listaPublicaciones.visibility = View.VISIBLE
             }
         }
     }
@@ -132,17 +132,4 @@ class PublicationsFragment : Fragment() {
     private fun showError() {
         Toast.makeText(activity, "Ha ocurrido un error al solicitar las publicaciones", Toast.LENGTH_SHORT).show()
     }
-
-    /* Avisa cuando el usuario pone un cambio en el buscador
-    override fun onQueryTextSubmit(query: String?): Boolean {
-        if(!query.isNullOrEmpty()) {
-            searchByDescripcion(query)
-        }
-        return true
-    }*/
-
-    /* No nos interesa
-    override fun onQueryTextChange(newText: String?): Boolean {
-        return true
-    } */
 }
