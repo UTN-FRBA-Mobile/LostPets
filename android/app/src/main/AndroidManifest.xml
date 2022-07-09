@@ -5,6 +5,9 @@
     <!-- Comunicación con API Rest, Facebook Login -->
     <uses-permission android:name="android.permission.INTERNET"/>
 
+    <!-- Comunication with actual position for maps -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
     <!-- Para subir foto de animal encontrado/perdido, ya sea de la camara o galería -->
     <uses-feature android:name="android.hardware.camera" android:required="false" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
