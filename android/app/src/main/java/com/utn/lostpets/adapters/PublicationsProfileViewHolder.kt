@@ -4,6 +4,7 @@ import android.graphics.BitmapFactory
 import android.os.Build
 import android.util.Base64
 import android.view.View
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.facebook.FacebookSdk.getApplicationContext
@@ -70,6 +71,9 @@ class PublicationsProfileViewHolder(view: View) : RecyclerView.ViewHolder(view) 
                 val call = getRetrofit(apiUrl).create(ApiPublicationsService::class.java).delPublication("$apiUrl", publiAEliminar)
 
                 binding.publiActiva.text = "Inactiva /"
+
+                binding.deleteButton.visibility = View.GONE
+                binding.editButton.visibility = View.GONE
             }
         }
     }
