@@ -1,5 +1,6 @@
 package com.utn.lostpets.fragments
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -71,8 +72,11 @@ class ProfileFragment : Fragment() {
 
             binding.loader.progressBar.visibility = View.VISIBLE
 
-            /* Solicitamos las fotos */
-            val call = getRetrofit().create(ApiPublicationsService::class.java).getPublications("$apiUrl")
+            /* Solicitamos las publicaciones del usuario */
+            /* Recupero el mail del usuario */
+            val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return@launch
+            email = sharedPref.getString("email", "email").toString()
+            val call = getRetrofit().create(ApiPublicationsService::class.java).getPublications("$apiUrl" + "usuario/$email/")
             val publications = call.body()
 
             /* Por publicación solicitamos sus fotos */
