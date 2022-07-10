@@ -90,7 +90,7 @@ class LoginFragment : Fragment() {
             startActivityForResult(googleClient.signInIntent, GOOGLE_SIGN_IN)
         }
 
-        /* Acción de "Acceder con Facebook" */
+        /* Acción de "Acceder con Facebook"
         binding.facebookButtom.setOnClickListener{
 
             LoginManager.getInstance().logInWithReadPermissions(getActivity(), listOf("email"))
@@ -124,7 +124,7 @@ class LoginFragment : Fragment() {
                         showAlert()
                     }
                 })
-        }
+        }*/
     }
 
     /* Hace el intento de login con Google */
