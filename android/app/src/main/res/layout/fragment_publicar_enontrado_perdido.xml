@@ -26,6 +26,7 @@
                     android:layout_centerHorizontal="true">
 
                     <ImageView
+                        android:id="@+id/flecha_volver_atras"
                         android:layout_width="75sp"
                         android:layout_height="750sp"
                         android:layout_marginLeft="30sp"

@@ -88,6 +88,9 @@ class PublicarEnontradoPerdidoFragment : Fragment() {
 
     private fun setup() {
 
+        binding.flechaVolverAtras.setOnClickListener {
+            getActivity()?.onBackPressed();
+        }
         /* Se vuelve a la pantalla de "Login" en caso de cerrarse la sesión */
 
         binding.publicarButton.setOnClickListener {
