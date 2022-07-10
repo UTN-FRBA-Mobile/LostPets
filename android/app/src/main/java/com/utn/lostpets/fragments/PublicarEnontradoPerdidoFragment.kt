@@ -3,6 +3,7 @@ package com.utn.lostpets.fragments
 import android.Manifest
 import android.R.attr
 import android.app.Activity.RESULT_OK
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -104,11 +105,12 @@ class PublicarEnontradoPerdidoFragment : Fragment() {
                 val sdf = SimpleDateFormat("yyyy-MM-dd hh:mm:ss")
                 val fecha = sdf.format(Date())
                 var imageBitmapString = bitMapToString(publicationImage!!)
-
+                val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+                val email = sharedPref?.getString("email", "email").toString()
 
 
                 var publiFinal = PublicationDTO(
-                    "carlos@gmail.com",
+                    email,
                     descripcion,
                     contacto,
                     fecha,
