@@ -33,7 +33,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/misPublicaciones"
-                    android:textSize="26dp"
+                    android:textSize="20dp"
                     android:textColor="@color/black"/>
 
             </LinearLayout>
@@ -56,6 +56,12 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent" />
+
+                <include
+                    android:id="@+id/navbar"
+                    layout="@layout/navbar"
+                    tools:layout_editor_absoluteX="0dp"
+                    tools:layout_editor_absoluteY="-86dp" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </RelativeLayout>
         <RelativeLayout
@@ -65,7 +71,5 @@
         </RelativeLayout>
 
         <!-- Navbar -->
-        <include layout="@layout/navbar"
-            android:id="@+id/navbar" />
     </RelativeLayout>
 </FrameLayout>

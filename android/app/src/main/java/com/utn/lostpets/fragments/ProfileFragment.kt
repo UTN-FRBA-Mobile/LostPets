@@ -1,5 +1,6 @@
 package com.utn.lostpets.fragments
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,8 +16,6 @@ import com.utn.lostpets.adapters.PublicationsProfileAdapter
 import com.utn.lostpets.databinding.FragmentProfileBinding
 import com.utn.lostpets.interfaces.ApiPublicationsService
 import com.utn.lostpets.model.Publication
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
@@ -34,8 +33,6 @@ class ProfileFragment : Fragment() {
     private lateinit var adapter: PublicationsProfileAdapter
     private val publicacionesFinal = mutableListOf<Publication>()
     private val publicaciones = mutableListOf<Publication>()
-    private val publicacionesPerdidos = mutableListOf<Publication>()
-    private val publicacionesEncontrados = mutableListOf<Publication>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -62,9 +59,7 @@ class ProfileFragment : Fragment() {
 
     private fun getRetrofit(): Retrofit {
         return Retrofit.Builder()
-            // TODO: descomentar y eliminar la linea que sigue al comentario
-//            .baseUrl("$apiUrl/$email/")
-            .baseUrl("$apiUrl/nicoomelnyk@gmail.com/")
+            .baseUrl("$apiUrl/$email/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
@@ -75,8 +70,11 @@ class ProfileFragment : Fragment() {
 
             binding.loader.progressBar.visibility = View.VISIBLE
 
-            /* Solicitamos las fotos */
-            val call = getRetrofit().create(ApiPublicationsService::class.java).getPublications("$apiUrl")
+            /* Solicitamos las publicaciones del usuario */
+            /* Recupero el mail del usuario */
+            val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return@launch
+            email = sharedPref.getString("email", "email").toString()
+            val call = getRetrofit().create(ApiPublicationsService::class.java).getPublications("$apiUrl" + "usuario/$email/")
             val publications = call.body()
 
             /* Por publicación solicitamos sus fotos */
@@ -124,15 +122,10 @@ class ProfileFragment : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-    private fun deletePublication(publication: Publication) {
-        if (publication.id != null) {
-        }
-    }
-
     private fun setup() {
 
         /* Navbar */
-        binding.navbar.bottomNavigation.selectedItemId = R.id.profile;
+        binding.navbar.bottomNavigation.selectedItemId = R.id.profile
         binding.navbar.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 /* Voy a pantalla de busqueda */
@@ -143,9 +136,8 @@ class ProfileFragment : Fragment() {
                 }
                 /* Voy a pantalla de publicaciones */
                 R.id.publications -> {
-                    val bundle = bundleOf("email" to email)
                     val action = R.id.action_profileFragment_to_publicationsFragment
-                    findNavController().navigate(action, bundle)
+                    findNavController().navigate(action)
                     true
                 }
                 R.id.search -> {
