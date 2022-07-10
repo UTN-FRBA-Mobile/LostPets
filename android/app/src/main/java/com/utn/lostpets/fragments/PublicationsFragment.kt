@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -109,8 +108,13 @@ class PublicationsFragment : Fragment() {
             var call: Response<List<PublicationsResponse>>
             /* Solicitamos las fotos */
             if (esPerdido) {
+                binding.lostButton.setBackgroundResource(R.drawable.lost_button_pushed_background)
+                binding.foundButton.setBackgroundResource(R.drawable.lostfound_button_background)
                 call = getRetrofit().create(ApiPublicationsService::class.java).getPublications("$apiUrlPerdidos")
+
             } else {
+                binding.foundButton.setBackgroundResource(R.drawable.found_button_pushed_background)
+                binding.lostButton.setBackgroundResource(R.drawable.lostfound_button_background)
                 call = getRetrofit().create(ApiPublicationsService::class.java).getPublications("$apiUrlEncontrados")
             }
 

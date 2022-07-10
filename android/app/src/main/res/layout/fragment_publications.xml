@@ -42,8 +42,8 @@
 
                         android:layout_weight="1"
                         android:background="@drawable/lostfound_button_background"
-                        android:textColor="@color/black"
-                        android:text="Perdidos" />
+                        android:text="Perdidos"
+                        android:textColor="@color/black" />
 
                 </RelativeLayout>
 
