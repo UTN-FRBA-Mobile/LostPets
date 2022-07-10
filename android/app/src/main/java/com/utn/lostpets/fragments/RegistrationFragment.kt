@@ -1,6 +1,7 @@
 package com.utn.lostpets.fragments
 
 import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -66,8 +67,15 @@ class RegistrationFragment : Fragment() {
 
     /* Redirigimos a pantalla principal en caso de login exitoso */
     private fun showHome(email: String) {
-        val bundle = bundleOf("email" to email)
+
+        /* Guardamos el email del usuario en memoria */
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
+        with (sharedPref.edit()) {
+            putString("email", email)
+            apply()
+        }
+
         val action = R.id.action_registrationFragment_to_introSliderFragment
-        findNavController().navigate(action, bundle)
+        findNavController().navigate(action)
     }
 }
