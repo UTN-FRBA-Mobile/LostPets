@@ -60,9 +60,9 @@ class PublicationsFragment : Fragment() {
         }
 
         /* Navbar */
-        binding.navbar.bottomNavigation.selectedItemId = R.id.publications;
+        binding.navbar.bottomNavigation.selectedItemId = R.id.publications
         binding.navbar.bottomNavigation.setOnItemSelectedListener { item ->
-            when(item.itemId) {
+            when (item.itemId) {
                 /* Voy a pantalla de busqueda */
                 R.id.search -> {
                     val action = R.id.action_publicationsFragment_to_mapsFragment
@@ -111,7 +111,6 @@ class PublicationsFragment : Fragment() {
                 binding.lostButton.setBackgroundResource(R.drawable.lost_button_pushed_background)
                 binding.foundButton.setBackgroundResource(R.drawable.lostfound_button_background)
                 call = getRetrofit().create(ApiPublicationsService::class.java).getPublications("$apiUrlPerdidos")
-
             } else {
                 binding.foundButton.setBackgroundResource(R.drawable.found_button_pushed_background)
                 binding.lostButton.setBackgroundResource(R.drawable.lostfound_button_background)
@@ -143,7 +142,6 @@ class PublicationsFragment : Fragment() {
                     }
                 }
             }
-
 
             activity?.runOnUiThread {
                 if (call.isSuccessful) {

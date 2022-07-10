@@ -25,6 +25,16 @@ class PublicationsProfileViewHolder(view: View) : RecyclerView.ViewHolder(view) 
         binding.idContacto.text = publication.contacto
         binding.idDistancia.text = resources.getString(R.string.distanceStart) + " $posicion " + resources.getString(R.string.distanceEnd)
         binding.idFecha.text = FechaCalculator.calcularDistancia(publication.fechaPublicacion)
+        if (publication.activo){
+            binding.publiActiva.text = "Activa /"
+        } else {
+            binding.publiActiva.text = "Inactiva /"
+        }
+        if (publication.esPerdido){
+            binding.encontrado.text = "No encontrado"
+        } else {
+            binding.encontrado.text = "Encontrado!"
+        }
         binding.editButton.setOnClickListener{
 
        }
