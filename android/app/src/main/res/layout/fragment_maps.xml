@@ -10,13 +10,16 @@ tools:context=".fragments.MapsFragment" >
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+
         <fragment xmlns:map="http://schemas.android.com/apk/res-auto"
             android:id="@+id/map"
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:scrollbars="vertical"/>
+            android:scrollbars="vertical" />
+
+
 
         <RadioGroup
             android:id="@+id/radio_group_list_selector"
@@ -37,19 +40,23 @@ tools:context=".fragments.MapsFragment" >
                 android:id="@+id/emailUsuario"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <Button
-                android:id="@+id/logoutButtom"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Cerrar Sesión" />
+                android:layout_weight="1"/>
 
         </RadioGroup>
 
         <!-- Navbar -->
-        <include layout="@layout/navbar"
-            android:id="@+id/navbar" />
+        <include
+            android:id="@+id/navbar"
+            layout="@layout/navbar" />
+
+        <Button
+            android:id="@+id/agregarPublicacionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="193dp"
+            android:layout_marginEnd="64dp"
+            android:text="Button" />
     </RelativeLayout>
 </FrameLayout>

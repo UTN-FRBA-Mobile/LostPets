@@ -19,6 +19,7 @@
         <entry key="..\:/Users/nicol/AndroidStudioProjects/LostPets/android/app/src/main/res/drawable/login_rectangle.xml" value="0.183" />
         <entry key="..\:/Users/nicol/AndroidStudioProjects/LostPets/android/app/src/main/res/drawable/splashscreen.xml" value="0.103" />
         <entry key="..\:/Users/nicol/AndroidStudioProjects/LostPets/android/app/src/main/res/layout/activity_main.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/nicol/AndroidStudioProjects/LostPets/android/app/src/main/res/layout/activity_maps.xml" value="0.19010416666666666" />
         <entry key="..\:/Users/nicol/AndroidStudioProjects/LostPets/android/app/src/main/res/layout/bottom_nav_menu.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/nicol/AndroidStudioProjects/LostPets/android/app/src/main/res/layout/fragment_blank.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/nicol/AndroidStudioProjects/LostPets/android/app/src/main/res/layout/fragment_intro1.xml" value="0.15579710144927536" />
@@ -26,16 +27,22 @@
         <entry key="..\:/Users/nicol/AndroidStudioProjects/LostPets/android/app/src/main/res/layout/fragment_intro3.xml" value="0.15579710144927536" />
         <entry key="..\:/Users/nicol/AndroidStudioProjects/LostPets/android/app/src/main/res/layout/fragment_intro_slider.xml" value="0.15579710144927536" />
         <entry key="..\:/Users/nicol/AndroidStudioProjects/LostPets/android/app/src/main/res/layout/fragment_login.xml" value="0.15384615384615385" />
-        <entry key="..\:/Users/nicol/AndroidStudioProjects/LostPets/android/app/src/main/res/layout/fragment_maps.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/nicol/AndroidStudioProjects/LostPets/android/app/src/main/res/layout/fragment_maps.xml" value="0.22" />
         <entry key="..\:/Users/nicol/AndroidStudioProjects/LostPets/android/app/src/main/res/layout/fragment_profile.xml" value="0.307518115942029" />
+        <entry key="..\:/Users/nicol/AndroidStudioProjects/LostPets/android/app/src/main/res/layout/fragment_publicar_enontrado_perdido.xml" value="0.19010416666666666" />
         <entry key="..\:/Users/nicol/AndroidStudioProjects/LostPets/android/app/src/main/res/layout/fragment_publications.xml" value="0.18" />
         <entry key="..\:/Users/nicol/AndroidStudioProjects/LostPets/android/app/src/main/res/layout/fragment_registration.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/nicol/AndroidStudioProjects/LostPets/android/app/src/main/res/layout/fragment_registration2.xml" value="0.1" />
         <entry key="..\:/Users/nicol/AndroidStudioProjects/LostPets/android/app/src/main/res/layout/item_publicacion.xml" value="0.18" />
         <entry key="..\:/Users/nicol/AndroidStudioProjects/LostPets/android/app/src/main/res/layout/item_publicacion_profile.xml" value="0.17831813576494426" />
         <entry key="..\:/Users/nicol/AndroidStudioProjects/LostPets/android/app/src/main/res/layout/loader.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/nicol/AndroidStudioProjects/LostPets/android/app/src/main/res/layout/nav_header.xml" value="0.30027173913043476" />
+        <entry key="..\:/Users/nicol/AndroidStudioProjects/LostPets/android/app/src/main/res/layout/nav_menu.xml" value="0.19010416666666666" />
         <entry key="..\:/Users/nicol/AndroidStudioProjects/LostPets/android/app/src/main/res/layout/navbar.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/nicol/AndroidStudioProjects/LostPets/android/app/src/main/res/layout/navbar_right.xml" value="0.19010416666666666" />
+        <entry key="..\:/Users/nicol/AndroidStudioProjects/LostPets/android/app/src/main/res/layout/right_navbar.xml" value="0.3802083333333333" />
         <entry key="..\:/Users/nicol/AndroidStudioProjects/LostPets/android/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.24635416666666668" />
+        <entry key="..\:/Users/nicol/AndroidStudioProjects/LostPets/android/app/src/main/res/menu/my_navigation_items.xml" value="0.19010416666666666" />
         <entry key="..\:/Users/nicol/AndroidStudioProjects/LostPets/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.183" />
         <entry key="..\:/Users/nicol/AndroidStudioProjects/LostPets/app/src/main/res/drawable/ic_launcher_background.xml" value="0.183" />
         <entry key="..\:/Users/nicol/AndroidStudioProjects/LostPets/app/src/main/res/drawable/splashscreen.xml" value="0.183" />

@@ -2,14 +2,16 @@ package com.utn.lostpets.fragments
 
 import android.content.pm.PackageManager
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.facebook.login.LoginManager
 import com.google.android.gms.maps.GoogleMap
@@ -25,6 +27,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     private val binding get() = _binding!!
     lateinit var map: GoogleMap
     private var email: String = ""
+    lateinit var toggle: ActionBarDrawerToggle
 
     companion object {
         const val REQUEST_CODE_LOCATION = 0;
@@ -38,6 +41,13 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         email = arguments?.getString("email").toString()
         binding.emailUsuario.text = email
         return binding.root
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (toggle.onOptionsItemSelected(item)){
+            true
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -54,17 +64,6 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun setup() {
-        /* Se vuelve a la pantalla de "Login" en caso de cerrarse la sesión */
-        binding.logoutButtom.setOnClickListener {
-            FirebaseAuth.getInstance().signOut()
-
-            // Si el login es con Facebook
-            LoginManager.getInstance().logOut()
-
-            val bundle = bundleOf("email" to email)
-            val action = R.id.action_mapsFragment_to_loginFragment
-            findNavController().navigate(action,bundle)
-        }
 
         /* Navbar */
         binding.navbar.bottomNavigation.selectedItemId = R.id.search;

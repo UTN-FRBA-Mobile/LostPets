@@ -87,6 +87,7 @@
                     app:layout_constraintStart_toStartOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
@@ -97,4 +98,8 @@
         <include layout="@layout/navbar"
             android:id="@+id/navbar" />
     </RelativeLayout>
+
+    <!-- Right Navbar -->
+    <include layout="@layout/right_navbar"
+        android:id="@+id/right_navbar" />
 </FrameLayout>

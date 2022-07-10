@@ -2,11 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/firstItem"
-        android:title="First Item" />
+        android:title="@string/lostPetsCerrarSesion" />
     <item
         android:id="@+id/secondtItem"
-        android:title="Second Item" />
-    <item
-        android:id="@+id/thirdItem"
-        android:title="Third Item" />
+        android:title="@string/lostPetsCambiarIdioma" />
 </menu>

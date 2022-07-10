@@ -2,13 +2,16 @@ package com.utn.lostpets.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.FirebaseAuth
 import com.utn.lostpets.R
 import com.utn.lostpets.adapters.PublicationsAdapter
 import com.utn.lostpets.databinding.FragmentPublicationsBinding
@@ -24,6 +27,7 @@ class PublicationsFragment : Fragment() {
 
     private var _binding: FragmentPublicationsBinding? = null
     private val binding get() = _binding!!
+    lateinit var toggle: ActionBarDrawerToggle
 
     private val apiUrl = "http://www.mengho.link/publications/"
     private val apiUrlPerdidos = "http://www.mengho.link/publications/perdidos/"
@@ -42,7 +46,37 @@ class PublicationsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentPublicationsBinding.inflate(inflater, container, false)
+        binding.apply {
+            toggle = ActionBarDrawerToggle(activity, rightNavbar.drawerLayout, R.string.app_name, R.string.app_name)
+            rightNavbar.drawerLayout.addDrawerListener(toggle)
+            toggle.syncState()
+
+            //supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+            rightNavbar.navView.setNavigationItemSelectedListener {
+                when (it.itemId) {
+                    R.id.firstItem -> {
+                        /* Se vuelve a la pantalla de "Login" en caso de cerrarse la sesión */
+                        FirebaseAuth.getInstance().signOut()
+                        val action = R.id.action_publicationsFragment_to_loginFragment
+                        findNavController().navigate(action)
+                    }
+                    R.id.secondtItem -> {
+                        Toast.makeText(activity, "Second Item Clicked", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                true
+            }
+
+        }
         return binding.root
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (toggle.onOptionsItemSelected(item)){
+            true
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -64,6 +64,9 @@
         <action
             android:id="@+id/action_publicationsFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_publicationsFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -76,6 +79,9 @@
         <action
             android:id="@+id/action_profileFragment_to_publicationsFragment"
             app:destination="@id/publicationsFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/intro1Fragment"

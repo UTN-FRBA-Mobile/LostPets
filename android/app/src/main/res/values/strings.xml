@@ -55,4 +55,8 @@
     <!-- Profile -->
     <string name="misPublicaciones">Aquí podrás ver tus publicaciones</string>
 
+    <!-- Profile -->
+    <string name="lostPetsGenerico">LOST PETS</string>
+    <string name="lostPetsCerrarSesion">Cerrar Sesión</string>
+    <string name="lostPetsCambiarIdioma">Cambiar Idioma</string>
 </resources>
