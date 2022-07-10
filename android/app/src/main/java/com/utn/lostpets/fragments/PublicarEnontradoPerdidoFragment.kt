@@ -15,12 +15,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat.checkSelfPermission
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.utn.lostpets.MainActivity
 import com.utn.lostpets.R
 import com.utn.lostpets.databinding.FragmentPublicarEnontradoPerdidoBinding
 import com.utn.lostpets.dto.PublicationDTO
 import com.utn.lostpets.interfaces.ApiPublicationsService
+import com.utn.lostpets.interfaces.LocationDataPass
+import com.utn.lostpets.model.LocationViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -40,6 +46,9 @@ class PublicarEnontradoPerdidoFragment : Fragment() {
     private var publicationImage: Bitmap? = null
 
     val Fragment.packageManager get() = activity?.packageManager
+
+    public var longitude = 0.0;
+    public var latitude = 0.0;
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -75,17 +84,25 @@ class PublicarEnontradoPerdidoFragment : Fragment() {
     val GALLERY_REQUEST_CODE = 13
     val GALLERY_PERMISSION_CODE = 1001;
 
+    private val viewModel: LocationViewModel by activityViewModels()
+
     private fun setup() {
+
         /* Se vuelve a la pantalla de "Login" en caso de cerrarse la sesión */
 
         binding.publicarButton.setOnClickListener {
             /* Creamos un hilo secundario para solicitar las publicaciones y sus respectivas fotos */
             CoroutineScope(Dispatchers.IO).launch {
+                var mainActivity = activity as MainActivity
+                latitude = mainActivity.latitude
+                longitude = mainActivity.longitude
                 var descripcion = binding.descripcionEditText.text.toString();
                 var contacto = binding.contactoEditText.text.toString();
                 val sdf = SimpleDateFormat("yyyy-MM-dd hh:mm:ss")
                 val fecha = sdf.format(Date())
                 var imageBitmapString = bitMapToString(publicationImage!!)
+
+
 
                 var publiFinal = PublicationDTO(
                     "carlos@gmail.com",
@@ -93,8 +110,8 @@ class PublicarEnontradoPerdidoFragment : Fragment() {
                     contacto,
                     fecha,
                     imageBitmapString!!,
-                    -34.639757,
-                    -58.452142,
+                    latitude,
+                    longitude,
                     true,
                     true
                 );
@@ -138,11 +155,12 @@ class PublicarEnontradoPerdidoFragment : Fragment() {
 
         /* Acción de ir a "Cargar Ubicacion" */
         binding.cargarUbicacionButton.setOnClickListener {
+            var clase = this.javaClass.name
+            val bundle = bundleOf("latitude" to latitude,"longitude" to longitude)
             val action = R.id.action_publicarEnontradoPerdidoFragment_to_mapLocationSelectorFragment
-            findNavController().navigate(action)
+            findNavController().navigate(action,bundle)
         }
     }
-
 
     private fun chooseImageGallery() {
         val intent = Intent(Intent.ACTION_PICK)
@@ -197,6 +215,13 @@ class PublicarEnontradoPerdidoFragment : Fragment() {
                     Toast.makeText(requireActivity(),"Permission denied", Toast.LENGTH_SHORT).show()
                 }
             }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if(publicationImage != null){
+            binding.cargarImagenImageView.setImageBitmap(publicationImage)
         }
     }
 

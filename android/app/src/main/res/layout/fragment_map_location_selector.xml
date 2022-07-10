@@ -15,7 +15,7 @@
         android:background="@color/colorPrimary">
     </androidx.appcompat.widget.Toolbar>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -27,5 +27,22 @@
         android:layout_height="match_parent"
         tools:context=".MapsActivity" />
 
-    </LinearLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/confirmarUbicacionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="75dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="12dp"
+            android:layout_alignParentBottom="true"
+            android:paddingHorizontal="20dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_background"
+            android:drawablePadding="10dp"
+            android:text="aceptar"
+            android:textColor="@color/black"
+            android:textSize="22dp"/>
+
+    </RelativeLayout>
+
+
 </LinearLayout>

@@ -13,7 +13,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -26,6 +29,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.net.PlacesClient
+import com.utn.lostpets.MainActivity
 import com.utn.lostpets.R
 import com.utn.lostpets.databinding.FragmentMapLocationSelectorBinding
 
@@ -36,6 +40,8 @@ class MapLocationSelectorFragment : Fragment(),OnMapReadyCallback {
     private val binding get() = _binding!!
 
     val Fragment.packageManager get() = activity?.packageManager
+    var longitude = 0.0
+    var latitude = 0.0
 
     lateinit var mMap: GoogleMap
 
@@ -200,6 +206,8 @@ class MapLocationSelectorFragment : Fragment(),OnMapReadyCallback {
             mMap.clear()
             mMap.addMarker(marker)
             println(point.latitude.toString() + "---" + point.longitude)
+            this.latitude = point.latitude
+            this.longitude = point.longitude
         })
     }
 
@@ -298,7 +306,13 @@ class MapLocationSelectorFragment : Fragment(),OnMapReadyCallback {
             mMap!!.moveCamera(CameraUpdateFactory.newLatLng(markerLatLng))
         }
 */
-    private fun setup() {
 
+    private fun setup() {
+        binding.confirmarUbicacionButton.setOnClickListener {
+            var mainActivity = activity as MainActivity
+            mainActivity.latitude = this.latitude
+            mainActivity.longitude = this.longitude
+            getActivity()?.onBackPressed();
+        }
     }
 }
