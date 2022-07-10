@@ -105,5 +105,14 @@
         android:id="@+id/publicarEnontradoPerdidoFragment"
         android:name="com.utn.lostpets.fragments.PublicarEnontradoPerdidoFragment"
         android:label="fragment_publicar_enontrado_perdido"
-        tools:layout="@layout/fragment_publicar_enontrado_perdido" />
+        tools:layout="@layout/fragment_publicar_enontrado_perdido" >
+        <action
+            android:id="@+id/action_publicarEnontradoPerdidoFragment_to_mapLocationSelectorFragment"
+            app:destination="@id/mapLocationSelectorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapLocationSelectorFragment"
+        android:name="com.utn.lostpets.fragments.MapLocationSelectorFragment"
+        android:label="fragment_map_location_selector"
+        tools:layout="@layout/fragment_map_location_selector" />
 </navigation>

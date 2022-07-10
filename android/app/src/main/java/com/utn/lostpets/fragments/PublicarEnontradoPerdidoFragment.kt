@@ -16,6 +16,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.utn.lostpets.R
 import com.utn.lostpets.databinding.FragmentPublicarEnontradoPerdidoBinding
 import com.utn.lostpets.dto.PublicationDTO
 import com.utn.lostpets.interfaces.ApiPublicationsService
@@ -132,6 +134,12 @@ class PublicarEnontradoPerdidoFragment : Fragment() {
             }else{
                 chooseImageGallery();
             }
+        }
+
+        /* Acción de ir a "Cargar Ubicacion" */
+        binding.cargarUbicacionButton.setOnClickListener {
+            val action = R.id.action_publicarEnontradoPerdidoFragment_to_mapLocationSelectorFragment
+            findNavController().navigate(action)
         }
     }
 

@@ -15,6 +15,10 @@
     <color name="cremitaOscuro">#B9AD50</color>
     <color name="dark_gray">#A9A9A9</color>
 
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
     <!-- Navbar style -->
     <style name="Theme.Fab_Bottom_app_bar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">#0F9D58</item>
