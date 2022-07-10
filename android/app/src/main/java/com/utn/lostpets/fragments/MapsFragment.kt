@@ -1,11 +1,13 @@
 package com.utn.lostpets.fragments
 
+import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -33,10 +35,8 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): FrameLayout {
         _binding = FragmentMapsBinding.inflate(inflater, container, false)
-        email = arguments?.getString("email").toString()
-        binding.emailUsuario.text = email
         return binding.root
     }
 
@@ -54,16 +54,22 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun setup() {
+
+        /* Recupero el mail del usuario */
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
+        email = sharedPref.getString("email", "email").toString()
+        binding.emailUsuario.text = email
+
         /* Se vuelve a la pantalla de "Login" en caso de cerrarse la sesión */
         binding.logoutButtom.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
 
-            // Si el login es con Facebook
-            LoginManager.getInstance().logOut()
+            /* Obtenemos el valor del email */
+            val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return@setOnClickListener
+            email = sharedPref.getString("email", "email").toString()
 
-            val bundle = bundleOf("email" to email)
             val action = R.id.action_mapsFragment_to_loginFragment
-            findNavController().navigate(action,bundle)
+            findNavController().navigate(action)
         }
 
         /* Navbar */
@@ -77,16 +83,14 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
             when(item.itemId) {
                 /* Voy a pantalla de publicaciones */
                 R.id.publications -> {
-                    val bundle = bundleOf("email" to email)
                     val action = R.id.action_mapsFragment_to_publicationsFragment
-                    findNavController().navigate(action,bundle)
+                    findNavController().navigate(action)
                     true
                 }
                 /* Voy a pantalla del perfil */
                 R.id.profile -> {
-                    val bundle = bundleOf("email" to email)
                     val action = R.id.action_mapsFragment_to_profileFragment
-                    findNavController().navigate(action,bundle)
+                    findNavController().navigate(action)
                     true
                 }
                 R.id.search -> {

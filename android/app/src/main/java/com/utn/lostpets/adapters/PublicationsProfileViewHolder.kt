@@ -1,6 +1,8 @@
 package com.utn.lostpets.adapters
 
+import android.graphics.BitmapFactory
 import android.os.Build
+import android.util.Base64
 import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
@@ -40,7 +42,11 @@ class PublicationsProfileViewHolder(view: View) : RecyclerView.ViewHolder(view) 
         binding.deleteButton.setOnClickListener{
 
         }
-        Picasso.get().load(publication.foto).into(binding.idPublicacion)
+
+        /* Insertamos como imagen el base64 */
+        val decodedString: ByteArray = Base64.decode(publication.foto, Base64.DEFAULT)
+        val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+        binding.idPublicacion.setImageBitmap(decodedByte)
     }
 
 
