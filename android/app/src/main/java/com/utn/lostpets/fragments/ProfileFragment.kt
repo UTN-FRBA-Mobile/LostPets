@@ -59,9 +59,7 @@ class ProfileFragment : Fragment() {
 
     private fun getRetrofit(): Retrofit {
         return Retrofit.Builder()
-            // TODO: descomentar y eliminar la linea que sigue al comentario
-//            .baseUrl("$apiUrl/$email/")
-            .baseUrl("$apiUrl/nicoomelnyk@gmail.com/")
+            .baseUrl("$apiUrl/$email/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
@@ -122,11 +120,6 @@ class ProfileFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-    }
-
-    private fun deletePublication(publication: Publication) {
-        if (publication.id != null) {
-        }
     }
 
     private fun setup() {
