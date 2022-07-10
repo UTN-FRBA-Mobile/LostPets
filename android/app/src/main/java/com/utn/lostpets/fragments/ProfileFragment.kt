@@ -139,9 +139,8 @@ class ProfileFragment : Fragment() {
                 }
                 /* Voy a pantalla de publicaciones */
                 R.id.publications -> {
-                    val bundle = bundleOf("email" to email)
                     val action = R.id.action_profileFragment_to_publicationsFragment
-                    findNavController().navigate(action, bundle)
+                    findNavController().navigate(action)
                     true
                 }
                 R.id.search -> {
