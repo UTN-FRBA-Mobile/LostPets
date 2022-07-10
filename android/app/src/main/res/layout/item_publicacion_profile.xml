@@ -39,16 +39,6 @@
             android:textStyle="bold"/>
     </LinearLayout>
     <TextView
-        android:id="@+id/idDistancia"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:text="TextView"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="25dp"
-        android:textStyle="bold"/>
-
-    <TextView
         android:id="@+id/idDescripcion"
         android:layout_width="162dp"
         android:layout_height="92dp"

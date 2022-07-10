@@ -23,7 +23,6 @@ class PublicationsProfileViewHolder(view: View) : RecyclerView.ViewHolder(view) 
     fun bind(publication: Publication, posicion: Int) {
         binding.idDescripcion.text = publication.descripcion
         binding.idContacto.text = publication.contacto
-        binding.idDistancia.text = resources.getString(R.string.distanceStart) + " $posicion " + resources.getString(R.string.distanceEnd)
         binding.idFecha.text = FechaCalculator.calcularDistancia(publication.fechaPublicacion)
         if (publication.activo){
             binding.publiActiva.text = "Activa /"
