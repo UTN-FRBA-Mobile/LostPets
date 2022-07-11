@@ -77,6 +77,7 @@ class ProfileFragment : Fragment() {
             val call = getRetrofit().create(ApiPublicationsService::class.java).getPublications("$apiUrl" + "usuario/$email/")
             val publications = call.body()
 
+            publicaciones.clear()
             /* Por publicación solicitamos sus fotos */
             if (publications != null) {
                 for (unaPubli in publications) {
