@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
@@ -20,6 +21,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.utn.lostpets.R
 import com.utn.lostpets.databinding.FragmentMapsBinding
+import com.utn.lostpets.dialogs.EncontradoPerdidoDialog
 
 class MapsFragment : Fragment(), OnMapReadyCallback {
 
@@ -101,10 +103,30 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
             }
         }
 
+        var esPerdido = true
         /* Acción de ir a "Publicar Encontrado/Perdido" */
         binding.agregarPublicacionButton.setOnClickListener {
             val action = R.id.action_mapsFragment_to_publicarEnontradoPerdidoFragment
-            findNavController().navigate(action)
+            val dialog = EncontradoPerdidoDialog(requireContext())
+            dialog.show()
+            val perdidoButton = dialog.findViewById(R.id.perdido_button) as Button
+            val encontradoButton = dialog.findViewById(R.id.encontrado_button) as Button
+
+            perdidoButton.setOnClickListener {
+                val bundle = bundleOf("esPerdido" to true, "textoTitutlo" to "Cargar Perdido", "esEdicion" to false)
+                val action = R.id.action_mapsFragment_to_publicarEnontradoPerdidoFragment
+                findNavController().navigate(action, bundle)
+                dialog.cancel()
+            }
+
+            encontradoButton.setOnClickListener {
+                val bundle = bundleOf("esPerdido" to false, "textoTitutlo" to "Cargar Encontrado", "esEdicion" to false)
+                val action = R.id.action_mapsFragment_to_publicarEnontradoPerdidoFragment
+                findNavController().navigate(action, bundle)
+                dialog.cancel()
+            }
+            //dialog.cancel()
+            //findNavController().navigate(action)
         }
     }
 

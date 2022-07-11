@@ -49,13 +49,21 @@ tools:context=".fragments.MapsFragment" >
         </RadioGroup>
 
         <!-- Navbar -->
-        <include layout="@layout/navbar"
-            android:id="@+id/navbar" />
+        <include
+            android:id="@+id/navbar"
+            layout="@layout/navbar" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/agregarPublicacionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="70dp"
+            android:textSize="50dp"
+            android:background="@drawable/button_background"
+            android:text="+"
+            android:textColor="@color/black"/>
     </RelativeLayout>
 </FrameLayout>

@@ -6,8 +6,15 @@ import android.util.Base64
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.findFragment
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.facebook.FacebookSdk.getApplicationContext
+import com.utn.lostpets.MainActivity
+import com.utn.lostpets.R
 import com.utn.lostpets.databinding.ItemPublicacionProfileBinding
 import com.utn.lostpets.dto.PublicationDEL
 import com.utn.lostpets.interfaces.ApiPublicationsService
@@ -22,7 +29,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.*
 
 class PublicationsProfileViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-
+    private val laView = view
     private val binding = ItemPublicacionProfileBinding.bind(view)
     private val resources = getApplicationContext().getResources()
 //    private val deleteButton: AppCompatButton = itemView.findViewById<AppCompatButton>(R.id.deleteButton)
@@ -55,6 +62,13 @@ class PublicationsProfileViewHolder(view: View) : RecyclerView.ViewHolder(view) 
             binding.encontrado.text = "Encontrado!"
         }
         binding.editButton.setOnClickListener {
+            val bundle = bundleOf("esPerdido" to true, "textoTitutlo" to "Editar Publicación","esEdicion" to true)
+            var fragmento = laView.findFragment() as Fragment
+            var mainActivity =  fragmento.activity as MainActivity
+            mainActivity.publication = publication
+            val action = R.id.action_profileFragment_to_publicarEnontradoPerdidoFragment
+            findNavController(laView.findFragment()).navigate(action, bundle)
+
         }
         binding.deleteButton.setOnClickListener {
             var apiUrl = "http://www.mengho.link/publications/publicacion/baja/"

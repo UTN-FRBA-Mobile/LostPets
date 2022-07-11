@@ -4,6 +4,7 @@ import com.utn.lostpets.dataclass.PublicationsPhotosResponse
 import com.utn.lostpets.dataclass.PublicationsResponse
 import com.utn.lostpets.dto.PublicationDEL
 import com.utn.lostpets.dto.PublicationDTO
+import com.utn.lostpets.dto.PublicationEditDTO
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -23,4 +24,7 @@ interface ApiPublicationsService {
 
     @POST
     suspend fun delPublication(@Url url: String, @Body publication: PublicationDEL) : Response<Int>
+
+    @POST
+    suspend fun editPublications(@Url url: String, @Body publication: PublicationEditDTO) : Response<Int>
 }

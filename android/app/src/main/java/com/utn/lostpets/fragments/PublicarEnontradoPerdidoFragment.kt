@@ -1,12 +1,12 @@
 package com.utn.lostpets.fragments
 
 import android.Manifest
-import android.R.attr
 import android.app.Activity.RESULT_OK
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -18,19 +18,20 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.utn.lostpets.MainActivity
 import com.utn.lostpets.R
 import com.utn.lostpets.databinding.FragmentPublicarEnontradoPerdidoBinding
 import com.utn.lostpets.dto.PublicationDTO
+import com.utn.lostpets.dto.PublicationEditDTO
 import com.utn.lostpets.interfaces.ApiPublicationsService
-import com.utn.lostpets.interfaces.LocationDataPass
 import com.utn.lostpets.model.LocationViewModel
+import com.utn.lostpets.model.Publication
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.ByteArrayOutputStream
@@ -43,8 +44,15 @@ class PublicarEnontradoPerdidoFragment : Fragment() {
     private var _binding: FragmentPublicarEnontradoPerdidoBinding? = null
     private val binding get() = _binding!!
 
-    private val apiUrl = "http://www.mengho.link/publications/publicacion/";
+    private val apiPostUrl = "http://www.mengho.link/publications/publicacion/";
+    private val apiEditUrl = "http://www.mengho.link/publications/publicacion/edit/";
     private var publicationImage: Bitmap? = null
+
+    private var esPerdido: Boolean? = true
+    private var textoTitulo: String = "Cargar Perdido"
+    private var esEdicion: Boolean = false
+
+    private var entre = false
 
     val Fragment.packageManager get() = activity?.packageManager
 
@@ -57,17 +65,29 @@ class PublicarEnontradoPerdidoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentPublicarEnontradoPerdidoBinding.inflate(inflater, container, false)
+        esPerdido = arguments?.getBoolean("esPerdido")
+        textoTitulo = arguments?.getString("textoTitutlo").toString()
+        esEdicion = arguments?.getBoolean("esEdicion") == true
+
+        setup()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setup()
+
+        binding.tipoPublicacionTextView.text = textoTitulo;
+
+
+    }
+
+    override fun onStart() {
+        super.onStart()
     }
 
     private fun getRetrofit() : Retrofit {
         return Retrofit.Builder()
-            .baseUrl(apiUrl)
+            .baseUrl(apiPostUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
@@ -97,41 +117,50 @@ class PublicarEnontradoPerdidoFragment : Fragment() {
         binding.publicarButton.setOnClickListener {
             /* Creamos un hilo secundario para solicitar las publicaciones y sus respectivas fotos */
             CoroutineScope(Dispatchers.IO).launch {
+                entre = false
                 var mainActivity = activity as MainActivity
                 latitude = mainActivity.latitude
                 longitude = mainActivity.longitude
                 var descripcion = binding.descripcionEditText.text.toString();
                 var contacto = binding.contactoEditText.text.toString();
                 val sdf = SimpleDateFormat("yyyy-MM-dd hh:mm:ss")
+
                 val fecha = sdf.format(Date())
                 var imageBitmapString = bitMapToString(publicationImage!!)
                 val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
                 val email = sharedPref?.getString("email", "email").toString()
 
 
-                var publiFinal = PublicationDTO(
-                    email,
-                    descripcion,
-                    contacto,
-                    fecha,
-                    imageBitmapString!!,
-                    latitude,
-                    longitude,
-                    true,
-                    true
-                );
-                //binding.loader.progressBar.visibility = View.VISIBLE
+                var call : Response<Int>
+                if(esEdicion){
+                    var publiEdicionFinal = PublicationEditDTO(mainActivity.publication!!.id,descripcion,contacto,imageBitmapString!!,latitude,longitude)
+                    call = getRetrofit().create(ApiPublicationsService::class.java).editPublications("$apiEditUrl",publiEdicionFinal)
+                }
+                else{
+                    var publiFinal = PublicationDTO(
+                        email,
+                        descripcion,
+                        contacto,
+                        fecha,
+                        imageBitmapString!!,
+                        latitude,
+                        longitude,
+                        esPerdido!!,
+                        true
+                    );
+                    //binding.loader.progressBar.visibility = View.VISIBLE
 
-                /* Solicitamos las fotos */
-                val call = getRetrofit().create(ApiPublicationsService::class.java).postPublications("$apiUrl",publiFinal)
-                val publications = call.body()
+                    /* Solicitamos las fotos */
+                    call = getRetrofit().create(ApiPublicationsService::class.java).postPublications("$apiPostUrl",publiFinal)
+                }
+
 
 
                 activity?.runOnUiThread {
                     if(call.isSuccessful) {
-                        showHola("Api retorno Ok")
+                        showHola("Publicación guardada satisfactoriamente")
                     } else {
-                        showHola("Api retorno error")
+                        showHola("Hubo un error, vuelva a internar mas tarde")
                     }
                     //binding.loader.progressBar.visibility = View.GONE
 
@@ -165,6 +194,25 @@ class PublicarEnontradoPerdidoFragment : Fragment() {
             val action = R.id.action_publicarEnontradoPerdidoFragment_to_mapLocationSelectorFragment
             findNavController().navigate(action,bundle)
         }
+
+        /*HIDRATAR PAGINA SI ES EDICION*/
+        if(esEdicion == true && !entre){
+            entre = true
+            var mainActivity = activity as MainActivity
+            val laPublicacion = mainActivity.publication!!
+            mainActivity.latitude = laPublicacion.latitud
+            mainActivity.longitude = laPublicacion.longitud
+            binding.descripcionEditText.setText(laPublicacion.descripcion)
+            binding.contactoEditText.setText(laPublicacion.contacto)
+
+            val decodedString: ByteArray = android.util.Base64.decode(laPublicacion.foto, android.util.Base64.DEFAULT)
+            val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+
+            publicationImage = decodedByte
+            binding.cargarImagenImageView.setImageBitmap(decodedByte)
+
+        }
+
     }
 
     private fun chooseImageGallery() {
