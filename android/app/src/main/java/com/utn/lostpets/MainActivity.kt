@@ -2,8 +2,6 @@ package com.utn.lostpets
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 
 class MainActivity : AppCompatActivity() {
 
