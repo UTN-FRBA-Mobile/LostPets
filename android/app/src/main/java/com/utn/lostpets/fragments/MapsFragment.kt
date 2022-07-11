@@ -6,12 +6,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.findFragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -20,8 +22,10 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.firebase.auth.FirebaseAuth
+import com.utn.lostpets.MainActivity
 import com.utn.lostpets.R
 import com.utn.lostpets.databinding.FragmentMapsBinding
+
 
 class MapsFragment : Fragment(), OnMapReadyCallback {
 
@@ -57,8 +61,9 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
             this.childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment!!.getMapAsync(this)
 
-        bottomSheet = activity?.findViewById<View>(R.id.bottom_sheet) as ConstraintLayout
-        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
+        val main = requireParentFragment().activity as MainActivity?
+        var bottomSheet1 = activity?.findViewById(R.id.bottom_sheet) as ConstraintLayout
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet1)
         setup()
     }
 
