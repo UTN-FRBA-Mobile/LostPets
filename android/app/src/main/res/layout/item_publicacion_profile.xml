@@ -21,14 +21,15 @@
         android:layout_marginLeft="5dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true">
+
         <TextView
             android:id="@+id/publiActiva"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:textColor="@color/black"
             android:text="TextView"
-            android:textStyle="bold"/>
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/encontrado"
             android:layout_width="wrap_content"

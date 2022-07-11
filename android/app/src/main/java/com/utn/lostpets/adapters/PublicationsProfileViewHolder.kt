@@ -1,11 +1,13 @@
 package com.utn.lostpets.adapters
 
+import android.content.res.ColorStateList
 import android.graphics.BitmapFactory
 import android.os.Build
 import android.util.Base64
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.findFragment
@@ -55,11 +57,13 @@ class PublicationsProfileViewHolder(view: View) : RecyclerView.ViewHolder(view) 
             binding.publiActiva.text = "Activa /"
         } else {
             binding.publiActiva.text = "Inactiva /"
+            binding.deleteButton.visibility = View.GONE
+            binding.editButton.visibility = View.GONE
         }
         if (publication.esPerdido) {
-            binding.encontrado.text = "No encontrado"
+            binding.encontrado.text = "Perdido"
         } else {
-            binding.encontrado.text = "Encontrado!"
+            binding.encontrado.text = "Encontrado"
         }
         binding.editButton.setOnClickListener {
             val bundle = bundleOf("esPerdido" to true, "textoTitutlo" to "Editar Publicación","esEdicion" to true)
@@ -84,11 +88,26 @@ class PublicationsProfileViewHolder(view: View) : RecyclerView.ViewHolder(view) 
 
                 val call = getRetrofit(apiUrl).create(ApiPublicationsService::class.java).delPublication("$apiUrl", publiAEliminar)
 
+                var fragmento = laView.findFragment() as Fragment
+                var mainActivity =  fragmento.activity as MainActivity
+                mainActivity?.runOnUiThread {
+                    if(call.isSuccessful) {
+                        showMensaje("Publicación eliminada satisfactoriamente", mainActivity)
+                    } else {
+                        showMensaje("Hubo un error, vuelva a internar mas tarde", mainActivity)
+                    }
+                    //binding.loader.progressBar.visibility = View.GONE
+                }
+
                 binding.publiActiva.text = "Inactiva /"
 
                 binding.deleteButton.visibility = View.GONE
                 binding.editButton.visibility = View.GONE
             }
         }
+    }
+
+    private fun showMensaje(algo : String, mainActivity : MainActivity) {
+        Toast.makeText(mainActivity, algo, Toast.LENGTH_SHORT).show()
     }
 }

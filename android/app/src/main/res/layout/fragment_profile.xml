@@ -50,8 +50,8 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/listaPublicacionesPerfil"
                     android:layout_width="413dp"
-                    android:layout_height="724dp"
-                    android:layout_marginBottom="4dp"
+                    android:layout_height="688dp"
+                    android:layout_marginBottom="58dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
