@@ -37,4 +37,4 @@ Se deben crear a mano dos archivos en las siguientes rutas:
 * LostPets\android\app a esta altura crear el archivo google-services.json (podrán encontrarlo en el siguiente tutorial https://firebase.google.com/docs/android/setup?hl=es) se necesitará una key de Firebase.
 * LostPets\android\app\src\main\res\values a esta altura crear el archivo google_maps_api.xml (podrán encontrarlo en el siguiente tutorial https://developers.google.com/maps/documentation/android-sdk/start?hl=es-419) se necesitará una key de Google Maps.
 
-.right tamanio { width: 50%; }
+.tamanio img { width: 50%; }
