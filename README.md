@@ -9,7 +9,7 @@ Aquí podrás de una manera muy sencilla:
 * Localizar, buscar y publicar animales encontrados
 
 Visualizá las publicaciones en tiempo real:
-![image | width=50 | height=50](https://user-images.githubusercontent.com/22462577/178363037-77aa1e0b-a32f-47a1-9eb7-ca14f9fd4d9b.png)
+![image | width=50% | height=50%](https://user-images.githubusercontent.com/22462577/178363037-77aa1e0b-a32f-47a1-9eb7-ca14f9fd4d9b.png)
 
 Visualizá animales perdidos:
 ![image](https://user-images.githubusercontent.com/22462577/178363107-42d367a5-4af3-4947-9fe2-723c99379782.png)
