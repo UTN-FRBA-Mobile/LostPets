@@ -8,10 +8,20 @@ Aquí podrás de una manera muy sencilla:
 * Localizar, buscar y publicar animales perdidos
 * Localizar, buscar y publicar animales encontrados
 
-![WhatsApp Image 2022-07-11 at 2 24 16 AM](https://user-images.githubusercontent.com/22462577/178194539-e5e3a0c3-fce5-4d1b-9080-72f6dac48ca0.jpeg)
-![WhatsApp Image 2022-07-11 at 2 24 16 AM (1)](https://user-images.githubusercontent.com/22462577/178194543-2065243d-e6fe-40d8-a6a7-8952e7d0f2fa.jpeg)
-![WhatsApp Image 2022-07-11 at 2 24 16 AM (2)](https://user-images.githubusercontent.com/22462577/178194546-02d13cf5-0857-4fa8-9d82-9d87287015a2.jpeg)
-![WhatsApp Image 2022-07-11 at 2 24 17 AM](https://user-images.githubusercontent.com/22462577/178194548-24e262af-4b4d-468f-a07f-e3cf3cac844e.jpeg)
+Visualizá las publicaciones en tiempo real:
+![image](https://user-images.githubusercontent.com/22462577/178363037-77aa1e0b-a32f-47a1-9eb7-ca14f9fd4d9b.png)
+
+Visualizá animales perdidos:
+![image](https://user-images.githubusercontent.com/22462577/178363107-42d367a5-4af3-4947-9fe2-723c99379782.png)
+
+Visualizá animales encontrados:
+![image](https://user-images.githubusercontent.com/22462577/178363242-cb0b7da7-1ebb-4520-bfc6-a67b094a9604.png)
+
+Gestioná tus publicaciones:
+![image](https://user-images.githubusercontent.com/22462577/178363304-ce9074dd-d1d8-4a26-91f9-d78a6c0f7523.png)
+
+¿Un vecino perdió a su perro? ¿Ya lo encontraron?  Cargá o editá publicaciones cuando quieras:
+![image](https://user-images.githubusercontent.com/22462577/178363395-80e7c207-1aba-4a30-83ef-85ad1ccd6313.png)
 
 ## ¿Qué necesitaremos de tí? 
 * Acceso a tu ubicación
