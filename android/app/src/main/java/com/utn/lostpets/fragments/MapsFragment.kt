@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
@@ -39,13 +40,14 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 class MapsFragment : Fragment(), OnMapReadyCallback {
-
+    private var latitudDefault = -34.617828
+    private var longitudDefault = -58.445860
     private var _binding: FragmentMapsBinding? = null
     private val binding get() = _binding!!
     lateinit var map: GoogleMap
     private var email: String = ""
     private val apiUrl = "http://www.mengho.link/publications/"
-    private val final_publications = mutableListOf<PublicationsResponse>()
+    private val final_publications = mutableMapOf<Integer,PublicationsResponse>()
 
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
 
@@ -66,6 +68,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         enableLocation()
         map.uiSettings.isZoomControlsEnabled = true
         map.setPadding(0, 125, 0, 340)
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(latitudDefault, longitudDefault), 10f))
 
     }
 
@@ -185,7 +188,9 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
                 if (call.isSuccessful) {
                     if (publications != null) {
                         final_publications.clear()
-                        final_publications.addAll(publications)
+                        for (publication in publications){
+                            final_publications.put(publication.id,publication)
+                        }
                         publications.map { publicacion -> markers(publicacion) }
                     }
                 } else {
@@ -261,9 +266,9 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
 
     private fun onMarkerClicked(marker: Marker) {
         var bottomSheet = activity?.findViewById(R.id.bottom_sheet) as ConstraintLayout
-        var publication = final_publications.get(marker.title.toInt() - 1)
+        var publication = final_publications[marker.title.toInt() as Integer]
         MainScope().launch {
-            var urlExt = publication.foto
+            var urlExt = publication?.foto
             val call = getRetrofit().create(ApiPublicationsService::class.java)
                 .getPublicationsPhotos("$apiUrl" + "photo/$urlExt/")
             val photo = call.body()
@@ -281,10 +286,12 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
 
 
         }
-        bottomSheet.findViewById<TextView>(R.id.description).text = publication.descripcion
-        bottomSheet.findViewById<TextView>(R.id.contact).text = publication.contacto
-        bottomSheet.findViewById<TextView>(R.id.lost_time).text =
-            FechaCalculator.calcularDistancia(publication.fechaPublicacion)
+        bottomSheet.findViewById<TextView>(R.id.description).text = publication?.descripcion
+        bottomSheet.findViewById<TextView>(R.id.contact).text = publication?.contacto
+        if (publication != null) {
+            bottomSheet.findViewById<TextView>(R.id.lost_time).text =
+                FechaCalculator.calcularDistancia(publication.fechaPublicacion)
+        }
 
         setBottomSheetVisibility(true)
     }
