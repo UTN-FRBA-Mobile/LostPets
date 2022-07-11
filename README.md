@@ -7,9 +7,9 @@ Esta APP puede ser la que necesites.
 Aquí podrás de una manera muy sencilla:
 * Localizar, buscar y publicar animales perdidos
 * Localizar, buscar y publicar animales encontrados
-
-Visualizá las publicaciones en tiempo real. Filtrá por animales perdidos o encontrados.
-Gestioná tus publicaciones. ¿Un vecino perdió a su perro? ¿Ya lo encontraron? Cargá o editá publicaciones cuando quieras.
+* Visualizá las publicaciones en tiempo real
+* Filtrá por animales perdidos o encontrados
+* Gestioná tus publicaciones. ¿Un vecino perdió a su perro? ¿Ya lo encontraron? Cargá o editá publicaciones cuando quieras
 
 ![image ](https://user-images.githubusercontent.com/22462577/178363037-77aa1e0b-a32f-47a1-9eb7-ca14f9fd4d9b.png)
 
