@@ -8,10 +8,7 @@ import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.app.ActivityCompat
@@ -40,6 +37,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+
 class MapsFragment : Fragment(), OnMapReadyCallback {
 
     private var _binding: FragmentMapsBinding? = null
@@ -66,6 +64,9 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
         enableLocation()
+        map.uiSettings.isZoomControlsEnabled = true
+        map.setPadding(0, 125, 0, 340)
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -279,11 +280,6 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
             }
 
 
-        }
-        if(publication.esPerdido){
-            marker.title = "Animal perdido"
-        }else {
-            marker.title = "Animal encontrado"
         }
         bottomSheet.findViewById<TextView>(R.id.description).text = publication.descripcion
         bottomSheet.findViewById<TextView>(R.id.contact).text = publication.contacto
