@@ -9,8 +9,9 @@ Aquí podrás de una manera muy sencilla:
 * Localizar, buscar y publicar animales encontrados
 
 Visualizá las publicaciones en tiempo real:
+<span class="tamanio">
 ![image | width=50% | height=50%](https://user-images.githubusercontent.com/22462577/178363037-77aa1e0b-a32f-47a1-9eb7-ca14f9fd4d9b.png)
-
+</span>
 Visualizá animales perdidos:
 ![image](https://user-images.githubusercontent.com/22462577/178363107-42d367a5-4af3-4947-9fe2-723c99379782.png)
 
@@ -35,3 +36,5 @@ El guardado de los datos se hace en la nube, por ende no es necesario levantar n
 Se deben crear a mano dos archivos en las siguientes rutas:
 * LostPets\android\app a esta altura crear el archivo google-services.json (podrán encontrarlo en el siguiente tutorial https://firebase.google.com/docs/android/setup?hl=es) se necesitará una key de Firebase.
 * LostPets\android\app\src\main\res\values a esta altura crear el archivo google_maps_api.xml (podrán encontrarlo en el siguiente tutorial https://developers.google.com/maps/documentation/android-sdk/start?hl=es-419) se necesitará una key de Google Maps.
+
+.right tamanio { width: 50%; }
