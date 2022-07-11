@@ -11,7 +11,7 @@ Aquí podrás de una manera muy sencilla:
 * Filtrar por animales perdidos o encontrados
 * Gestionar tus publicaciones. ¿Un vecino perdió a su perro? ¿Ya lo encontraron? Cargá o editá publicaciones cuando quieras
 
-![image ](https://user-images.githubusercontent.com/22462577/178363037-77aa1e0b-a32f-47a1-9eb7-ca14f9fd4d9b.png | width=100)
+<img src="https://user-images.githubusercontent.com/22462577/178363037-77aa1e0b-a32f-47a1-9eb7-ca14f9fd4d9b.png" width=50% height=50%>
 
 ![image](https://user-images.githubusercontent.com/22462577/178363107-42d367a5-4af3-4947-9fe2-723c99379782.png)
 
