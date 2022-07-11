@@ -71,7 +71,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="680dp"
             android:layout_marginTop="90dp"
             >
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -81,7 +81,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/listaPublicaciones"
                     android:layout_width="413dp"
-                    android:layout_height="680dp"
+                    android:layout_height="match_parent"
                     android:layout_marginBottom="58dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
