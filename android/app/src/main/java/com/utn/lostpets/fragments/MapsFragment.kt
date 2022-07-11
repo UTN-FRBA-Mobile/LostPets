@@ -22,6 +22,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
@@ -157,8 +158,6 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
                 findNavController().navigate(action, bundle)
                 dialog.cancel()
             }
-            //dialog.cancel()
-            //findNavController().navigate(action)
         }
 
         /* Cargando markers */
@@ -250,7 +249,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     private fun markers(publication: PublicationsResponse) {
         map.addMarker(
             MarkerOptions().position(LatLng(publication.latitud, publication.longitud))
-                .title(publication.id.toString())
+                .title(publication.id.toString()).icon(BitmapDescriptorFactory.defaultMarker(getMarkerColor(publication.esPerdido)))
         )
         map.setOnMarkerClickListener { marker ->
             onMarkerClicked(marker)
@@ -281,7 +280,11 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
 
 
         }
-
+        if(publication.esPerdido){
+            marker.title = "Animal perdido"
+        }else {
+            marker.title = "Animal encontrado"
+        }
         bottomSheet.findViewById<TextView>(R.id.description).text = publication.descripcion
         bottomSheet.findViewById<TextView>(R.id.contact).text = publication.contacto
         bottomSheet.findViewById<TextView>(R.id.lost_time).text =
@@ -303,4 +306,12 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
             Toast.LENGTH_SHORT
         ).show()
     }
+
+    private fun getMarkerColor(isLost: Boolean): Float {
+        if(isLost)
+            return BitmapDescriptorFactory.HUE_RED;
+        else
+            return BitmapDescriptorFactory.HUE_GREEN;
+    }
+
 }
