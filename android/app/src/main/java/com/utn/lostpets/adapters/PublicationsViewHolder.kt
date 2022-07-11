@@ -1,6 +1,8 @@
 package com.utn.lostpets.adapters
 
+import android.graphics.BitmapFactory
 import android.os.Build
+import android.util.Base64
 import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
@@ -10,6 +12,7 @@ import com.utn.lostpets.R
 import com.utn.lostpets.databinding.ItemPublicacionBinding
 import com.utn.lostpets.model.Publication
 import com.utn.lostpets.utils.FechaCalculator
+
 
 class PublicationsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
@@ -22,6 +25,10 @@ class PublicationsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         binding.idContacto.text = publication.contacto
         binding.idDistancia.text = resources.getString(R.string.distanceStart) + " $posicion " + resources.getString(R.string.distanceEnd)
         binding.idFecha.text = FechaCalculator.calcularDistancia(publication.fechaPublicacion)
-        Picasso.get().load(publication.foto).into(binding.idPublicacion)
+
+        /* Insertamos como imagen el base64 */
+        val decodedString: ByteArray = Base64.decode(publication.foto, Base64.DEFAULT)
+        val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+        binding.idPublicacion.setImageBitmap(decodedByte)
     }
 }

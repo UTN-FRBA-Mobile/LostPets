@@ -31,6 +31,12 @@
         <action
             android:id="@+id/action_mapsFragment_to_publicationsFragment"
             app:destination="@id/publicationsFragment" />
+        <action
+            android:id="@+id/action_mapsFragment_to_publicarEnontradoPerdidoFragment"
+            app:destination="@id/publicarEnontradoPerdidoFragment" />
+        <action
+            android:id="@+id/action_mapsFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
@@ -51,7 +57,26 @@
         android:id="@+id/publicationsFragment"
         android:name="com.utn.lostpets.fragments.PublicationsFragment"
         android:label="fragment_publications"
-        tools:layout="@layout/fragment_publications" />
+        tools:layout="@layout/fragment_publications" >
+        <action
+            android:id="@+id/action_publicationsFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+        <action
+            android:id="@+id/action_publicationsFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.utn.lostpets.fragments.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_publicationsFragment"
+            app:destination="@id/publicationsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/intro1Fragment"
         android:name="com.utn.lostpets.fragments.Intro1Fragment"
@@ -76,4 +101,18 @@
             android:id="@+id/action_introSliderFragment_to_mapsFragment"
             app:destination="@id/mapsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/publicarEnontradoPerdidoFragment"
+        android:name="com.utn.lostpets.fragments.PublicarEnontradoPerdidoFragment"
+        android:label="fragment_publicar_enontrado_perdido"
+        tools:layout="@layout/fragment_publicar_enontrado_perdido" >
+        <action
+            android:id="@+id/action_publicarEnontradoPerdidoFragment_to_mapLocationSelectorFragment"
+            app:destination="@id/mapLocationSelectorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapLocationSelectorFragment"
+        android:name="com.utn.lostpets.fragments.MapLocationSelectorFragment"
+        android:label="fragment_map_location_selector"
+        tools:layout="@layout/fragment_map_location_selector" />
 </navigation>

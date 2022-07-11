@@ -2,6 +2,7 @@ package com.utn.lostpets.fragments
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -89,7 +90,7 @@ class LoginFragment : Fragment() {
             startActivityForResult(googleClient.signInIntent, GOOGLE_SIGN_IN)
         }
 
-        /* Acción de "Acceder con Facebook" */
+        /* Acción de "Acceder con Facebook"
         binding.facebookButtom.setOnClickListener{
 
             LoginManager.getInstance().logInWithReadPermissions(getActivity(), listOf("email"))
@@ -123,7 +124,7 @@ class LoginFragment : Fragment() {
                         showAlert()
                     }
                 })
-        }
+        }*/
     }
 
     /* Hace el intento de login con Google */
@@ -172,8 +173,14 @@ class LoginFragment : Fragment() {
 
     /* Redirigimos a pantalla principal en caso de login exitoso */
     private fun showHome(email: String) {
-        val bundle = bundleOf("email" to email)
         val action = R.id.action_loginFragment_to_introSliderFragment
-        findNavController().navigate(action, bundle)
+
+        /* Guardamos el email del usuario en memoria */
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
+        with (sharedPref.edit()) {
+            putString("email", email)
+            apply()
+        }
+        findNavController().navigate(action)
     }
 }

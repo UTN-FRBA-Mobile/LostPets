@@ -112,12 +112,29 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_mapsFragment_to_profileFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_mapsFragment_to_publicationsFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
                           </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="profileFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="148" />
+                            <option name="y" value="403" />
+                          </Point>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -145,6 +162,11 @@
                         </option>
                         <option name="myPositions">
                           <map>
+                            <entry key="action_registrationFragment_to_introSliderFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_registrationFragment_to_loginFragment">
                               <value>
                                 <LayoutPositions />
