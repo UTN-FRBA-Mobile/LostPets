@@ -2,26 +2,42 @@ package com.utn.lostpets.fragments
 
 import android.content.Context
 import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.drawToBitmap
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.firebase.auth.FirebaseAuth
+import com.utn.lostpets.MainActivity
 import com.utn.lostpets.R
 import com.utn.lostpets.databinding.FragmentMapsBinding
+import com.utn.lostpets.dataclass.PublicationsResponse
+import com.utn.lostpets.interfaces.ApiPublicationsService
+import com.utn.lostpets.model.Publication
+import com.utn.lostpets.utils.FechaCalculator
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class MapsFragment : Fragment(), OnMapReadyCallback {
 
@@ -29,9 +45,10 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     private val binding get() = _binding!!
     lateinit var map: GoogleMap
     private var email: String = ""
+    private val apiUrl = "http://www.mengho.link/publications/"
+    private val final_publications = mutableListOf<PublicationsResponse>()
 
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
-    private var bottomSheet: View? = null
 
     companion object {
         const val REQUEST_CODE_LOCATION = 0
@@ -48,7 +65,6 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
         enableLocation()
-        markers()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -56,9 +72,9 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         val mapFragment =
             this.childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment!!.getMapAsync(this)
-
-        bottomSheet = activity?.findViewById<View>(R.id.bottom_sheet) as ConstraintLayout
-        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
+        var bottomSheet1 = activity?.findViewById(R.id.bottom_sheet) as ConstraintLayout
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet1)
+        setBottomSheetVisibility(false)
         setup()
     }
 
@@ -116,6 +132,39 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
             val action = R.id.action_mapsFragment_to_publicarEnontradoPerdidoFragment
             findNavController().navigate(action)
         }
+
+        /* Cargando markers */
+
+        loadingLostAnimals()
+    }
+
+    private fun getRetrofit(): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(apiUrl)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
+    private fun loadingLostAnimals() {
+        MainScope().launch {
+            var call: Response<List<PublicationsResponse>>
+
+            call = getRetrofit().create(ApiPublicationsService::class.java).getPublications(apiUrl)
+
+            val publications = call.body()
+
+            activity?.runOnUiThread {
+                if (call.isSuccessful) {
+                    if (publications != null) {
+                        final_publications.clear()
+                        final_publications.addAll(publications)
+                        publications.map { publicacion -> markers(publicacion) }
+                    }
+                } else {
+                    showError()
+                }
+            }
+        }
     }
 
     private fun isLocalizationPermissionGranted() = ContextCompat.checkSelfPermission(
@@ -170,9 +219,51 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
-    private fun markers() {
-        val sydney = LatLng(-34.0, 151.0)
-        map.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
+    private fun markers(publication: PublicationsResponse) {
+        map.addMarker(MarkerOptions().position(LatLng(publication.latitud, publication.longitud)).title(publication.id.toString()))
+        map.setOnMarkerClickListener { marker ->
+            onMarkerClicked(marker)
+            false
+        }
 
+    }
+
+    private fun onMarkerClicked(marker: Marker) {
+        var bottomSheet = activity?.findViewById(R.id.bottom_sheet) as ConstraintLayout
+        var publication = final_publications.get(marker.title.toInt()-1)
+        MainScope().launch {
+            var urlExt = publication.foto
+            val call = getRetrofit().create(ApiPublicationsService::class.java)
+                .getPublicationsPhotos("$apiUrl" + "photo/$urlExt/")
+            val photo = call.body()
+
+            activity?.runOnUiThread {
+                if (call.isSuccessful) {
+                    val decodedString: ByteArray = Base64.decode(photo?.foto, Base64.DEFAULT)
+                    val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+                    bottomSheet.findViewById<ImageView>(R.id.photo_id).setImageBitmap(decodedByte)
+                } else {
+                    showError()
+                }
+            }
+
+
+
+        }
+
+        bottomSheet.findViewById<TextView>(R.id.description).text = publication.descripcion
+        bottomSheet.findViewById<TextView>(R.id.contact).text = publication.contacto
+        bottomSheet.findViewById<TextView>(R.id.lost_time).text = FechaCalculator.calcularDistancia(publication.fechaPublicacion)
+
+        setBottomSheetVisibility(true)
+    }
+
+    private fun setBottomSheetVisibility(isVisible: Boolean) {
+        val updatedState = if (isVisible) BottomSheetBehavior.STATE_EXPANDED else BottomSheetBehavior.STATE_COLLAPSED
+        bottomSheetBehavior.state = updatedState
+    }
+
+    private fun showError() {
+        Toast.makeText(activity, "Ha ocurrido un error al solicitar las publicaciones", Toast.LENGTH_SHORT).show()
     }
 }
